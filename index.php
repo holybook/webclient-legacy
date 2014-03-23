@@ -2,7 +2,7 @@
 <html dir="ltr" lang="en">
 <head>
 <meta charset="utf-8" />
-<title>${title}</title>
+<title>Holybook</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
