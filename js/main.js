@@ -39,7 +39,7 @@ function search() {
     loader.fadeIn(400);
     content.fadeOut(250);
     $.ajax({
-        url : "http://localhost:8983/solr/books_en/select",
+        url : "http://"+ window.location.hostname + ":8983/solr/books_en/select",
         contentType : "application/json",
         dataType : "jsonp",
         jsonp : "json.wrf",
