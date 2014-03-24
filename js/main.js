@@ -36,8 +36,7 @@ function search() {
     var query = $('#search-box').val();
     noResultBox.hide();
     errorBox.hide();
-    loader.fadeIn(400);
-    content.fadeOut(250);
+    loader.fadeIn(100);
     $.ajax({
         url : "http://"+ window.location.hostname + ":8983/solr/books_en/select",
         contentType : "application/json",
@@ -62,7 +61,7 @@ function search() {
 }
 
 function handleSearchResult(data) {
-    loader.fadeOut(400);
+    loader.fadeOut(100);
     if (data.responseHeader.status != 0) {
         errorBox.text(data.responseHeader.status);
         errorBox.show();
@@ -76,7 +75,6 @@ function handleSearchResult(data) {
         fillPerformanceLabel(found, time);
         fillPagination(found);
         fillSearchResults(data.response.docs);
-        content.fadeIn(250);
     }
 }
 
