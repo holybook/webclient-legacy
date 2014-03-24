@@ -38,7 +38,7 @@ function search() {
     errorBox.hide();
     loader.fadeIn(100);
     $.ajax({
-        url : "http://"+ window.location.hostname + ":8983/solr/books_en/select",
+        url : "http://" + window.location.hostname + ":8983/solr/books_en/select",
         contentType : "application/json",
         dataType : "jsonp",
         jsonp : "json.wrf",
@@ -147,16 +147,38 @@ function fillSearchResults(results) {
 }
 
 function appendSearchResult(container, doc) {
-    container
-            .append(
-                    $("<a/>", {
-                        href : doc["id"],
-                        target : "_blank",
-                        class : "search-result"
-                    })
-                            .append(
-                                    $("<div/>").append($('<p/>').html(doc["text"])).append(
-                                            $('<p/>').append(
-                                                    $('<small/>').append(doc["author"]).append(" - ").append(doc["title"]).append(" - ").append(
-                                                            doc["section_title"]))))).append('<br/>')
+    var link = $("<a/>", {
+        class : "search-result"
+    }).append(
+            $("<div/>").append($('<p/>').html(doc["text"])).append(
+                    $('<p/>').append($('<small/>').append(doc["author"]).append(" - ").append(doc["title"]).append(" - ").append(doc["section_title"]))));
+    link.click(function() {
+        $.ajax({
+            url : "http://" + window.location.hostname + ":8983/solr/books_en/select",
+            contentType : "application/json",
+            dataType : "jsonp",
+            jsonp : "json.wrf",
+            data : {
+                q : sprintf('title:"%s"', doc.title),
+                start : 0,
+                rows : 10,
+                wt : "json",
+                debug : "timing",
+                sort : "section_index asc, index asc",
+                fl : "text"
+            },
+            method : "GET",
+            success : function(data) {
+                console.log(data);
+                // TODO: implement reader
+            },
+            error : function(jqXHR, textStatus, errorThrown) {
+                loader.hide(200);
+                errorBox.text(errorThrown);
+                errorBox.show();
+            },
+            contentType : "application/json; charset=UTF-8"
+        });
+    });
+    container.append(link).append('<br/>');
 }
