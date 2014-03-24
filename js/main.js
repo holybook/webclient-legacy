@@ -47,7 +47,8 @@ function search() {
             start : offset,
             rows : limit,
             wt : "json",
-            debug : "timing"
+            debug : "timing",
+            hl : true
         },
         method : "GET",
         success : handleSearchResult,
@@ -74,7 +75,7 @@ function handleSearchResult(data) {
             noResultBox.show();
         fillPerformanceLabel(found, time);
         fillPagination(found);
-        fillSearchResults(data.response.docs);
+        fillSearchResults(data);
     }
 }
 
@@ -139,18 +140,18 @@ function fillPerformanceLabel(numberFound, time) {
     text.text(sprintf("%d %s (%.2f seconds)", numberFound, resultsString, time));
 }
 
-function fillSearchResults(results) {
-    for (i in results) {
-        var doc = results[i];
-        appendSearchResult($('#content'), doc);
+function fillSearchResults(data) {
+    for (i in data.response.docs) {
+        var doc = data.response.docs[i];
+        appendSearchResult($('#content'), doc, data.highlighting[doc.id].text);
     }
 }
 
-function appendSearchResult(container, doc) {
+function appendSearchResult(container, doc, text) {
     var link = $("<a/>", {
         class : "search-result"
     }).append(
-            $("<div/>").append($('<p/>').html(doc["text"])).append(
+            $("<div/>").append($('<p/>').html(text)).append(
                     $('<p/>').append($('<small/>').append(doc["author"]).append(" - ").append(doc["title"]).append(" - ").append(doc["section_title"]))));
     link.click(function() {
         $.ajax({
