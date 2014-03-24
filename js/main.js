@@ -33,6 +33,7 @@ $(document).ready(function() {
 });
 
 function search() {
+    var offset = limit * (currentPage - 1);
     var query = $('#search-box').val();
     noResultBox.hide();
     errorBox.hide();
@@ -80,7 +81,6 @@ function handleSearchResult(data) {
 }
 
 function searchPage() {
-    offset = limit * (currentPage - 1);
     search();
 }
 
