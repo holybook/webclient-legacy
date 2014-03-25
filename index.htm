@@ -1,0 +1,383 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Holybook</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="apple-touch-icon" href="favicon.png" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Bootstrap -->
+<link href="/lib/bootstrap-3.0.3/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link type="text/css" rel="stylesheet" media="all" href="/lib/mmenu/css/jquery.mmenu.css" />
+<link rel="stylesheet" href="/lib/alertify-0.3.11/css/alertify.core.css" />
+<link rel="stylesheet" href="/lib/alertify-0.3.11/css/alertify.default.css" />
+<link rel="stylesheet" href="/lib/plupload-2.1.0/js/jquery.plupload.queue/css/jquery.plupload.queue.css" />
+<link href="/css/main.css" rel="stylesheet" media="screen">
+</head>
+<body>
+	<nav class="navbar navbar-default" role="navigation">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">Holybook</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#search" data-toggle="tab">Search</a></li>
+				<li><a href="#roadmap" data-toggle="tab">Roadmap</a></li>
+			</ul>
+		</div>
+		<!-- /.navbar-collapse -->
+	</nav>
+
+	<div id="body">
+		<div class="container">
+			<div class="tab-content">
+				<div class="tab-pane active" id="search">
+					<form role="search">
+						<div class="row">
+							<div class="input-group col-xs-12 col-md-offset-2 col-md-8">
+								<!-- span class="input-group-btn">
+				<a class="btn btn-primary" href="#filter"><span class="glyphicon glyphicon-th-list"></span></a>
+			</span -->
+								<input type="text" class="form-control" id="search-box">
+								<span class="input-group-btn" style="max-width: 200px;">
+									<button type="submit" class="btn" id="search-button">Search</button>
+								</span>
+							</div>
+						</div>
+					</form>
+
+					<div class="row">
+						<div class="col-xs-12 col-md-offset-2 performance-label">
+							<small></small>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12 col-md-offset-2">
+							<ul class="pagination">
+							</ul>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-xs-12 col-lg-offset-2 col-lg-8">
+							<div class="alert alert-warning" id="no-result">No results found.</div>
+							<div class="alert alert-danger" id="error">No results found.</div>
+							<div id="content"></div>
+						</div>
+					</div>
+
+					<div class="row" id="loading">
+						<img class="col-lg-offset-4 col-xs-1" src="/img/loader.gif" />
+					</div>
+
+				</div>
+				<div class="tab-pane" id="roadmap">
+					<div class="row">
+						<p>
+							This page lists the features that are planned for the first official release version of <i>holybook</i>. Please refer to the
+							<a href="https://github.com/holybook/webapp">public github repository</a>
+							for a more detailed and technical status of the project.
+						</p>
+
+						<h2>Alpha Phase</h2>
+
+						<p>
+							In the <strong>alpha phase</strong>, the most basic features will be developed and deployed as a series of multiple alpha releases. The code will not be
+							optimized for high load and this phase is intended to make this service robust and to try out different approaches for usability and search ranking.
+						</p>
+
+						<p>
+							<i>In this phase the service will only be available to a small number of trusted testers</i>
+						</p>
+
+						<h3>Version 0.1 (Current)</h3>
+
+						<table class="table">
+							<tr>
+								<td class="status"><span class="glyphicon glyphicon-check roadmap-status-success"></span></td>
+								<td class="function">Search</td>
+								<td>This is the most essential functionality of this service. It uses the <a href="https://developers.google.com/appengine/docs/java/search/">Google
+										Search Api</a> to index books by paragraphs and to provide query functionality. The Google Search API supports a variety of query features:
+									<ul>
+										<li>Possibly nested AND, OR and NOT operators. AND means that the words need to appear in the same paragraph (no order specified) whereas OR
+											means that only one of the options need to appear in the paragraph. So for example: <span class="query">test AND gold</span> will match all
+											paragraphs containing both the words "test" and "gold" whereas <span class="query">test OR gold</span> matches all paragraphs containing the word <i>test</i>
+											and/or the word <i>gold</i>. Note that a normal space is interpreted as AND (e.g. <span class="query">test gold</span> is the same as <span
+											class="query">test AND gold</span>. NOT is used to exclude words. A paragraph does only match a query if it does not contain any of the words (or
+											phrases) that are prepended by a NOT operator.
+										</li>
+										<li>Stemming is indicated by the ~ operator. Stemming means that along with a word, also it derived forms (plural, -ing) are accepted during
+											search.</li>
+										<li>Multiple words can be grouped by forming a phrase with the <i>"</i> character. For example <span class="query">"we test"</span> will only
+											match paragraphs that contain the complete phrase <i>we test</i>. This works exactly the same way as in normal google search
+										</li>
+									</ul> Note that currently only the contents of the <a href="http://reference.bahai.org/en/">Bahai Reference Library</a> can be searched. The list of text
+									that is indexed and available for search does not depend on the functionality of this service and thus is not tracked as part of this roadmap. However,
+									the next release will include a reader application that allows to browse the available books so you can see which one's are available at a particular
+									point in time.
+								</td>
+							</tr>
+							<tr>
+								<td class="status"><span class="glyphicon glyphicon-check roadmap-status-success"></span></td>
+								<td class="function">Responsive Menu</td>
+								<td>This is a simple feature that shows a menu on top of the page. It allows a user to switch between different applications that are part of this
+									service. Currently only the Search (and roadmap) are available. The menu is responsive, meaning it collapses on devices with small screens allowing the
+									service to be used also on mobile phones without restrictions on the available functionality. Note that an app is planned but implementation will
+									probably start after this service has been finished (i.e. reached v1.0).</td>
+							</tr>
+						</table>
+
+						<h3>Version 0.2</h3>
+
+						<table class="table">
+							<tr>
+								<td class="status">
+									<!-- span class="glyphicon glyphicon-refresh roadmap-status-progress"></span-->
+								</td>
+								<td class="function">Filter</td>
+								<td>The filter allows to restrict a search query by selecting specific religions, authors, books etc. It will be provided as part of a more general
+									page called <i>settings</i>.
+								</td>
+							</tr>
+							<tr>
+								<td class="status"></td>
+								<td class="function">Reader</td>
+								<td>The Reader provides functionality to browse the set of available books and read them. It will split up books in smaller chunks (e.g. sections)
+									so that not the whole book needs to be requested at once, thus making the whole reading experience faster. The Reader application will work similar to
+									the <a href="http://reference.bahai.org/en/">Bahai Reference Library</a> site.
+								</td>
+							</tr>
+						</table>
+
+						<h3>Version 0.3</h3>
+						<table class="table">
+							<tr>
+								<td class="status">
+									<!-- span class="glyphicon glyphicon-refresh roadmap-status-progress"></span-->
+								</td>
+								<td class="function">Ranking</td>
+								<td>This feature will rank more relevant documents higher. Relevancy will be determined by certain metrics based on the usage of this service. For
+									example quotations that are copied, clicked on or added to a collection are supposed to be more important. Also some books can be classified as more
+									relevant than others. This is the most critical feature of this service as it defines the quality of search results.</td>
+							</tr>
+							<tr>
+								<td class="status"></td>
+								<td class="function">Search Settings</td>
+								<td>Adds additional functionality to the settings dialog that is used for the filter. The user should be able to define results per page, maximum
+									number of results and so on.</td>
+							</tr>
+						</table>
+
+						<h3>Version 0.4</h3>
+						<table class="table">
+							<tr>
+								<td class="status">
+									<!-- span class="glyphicon glyphicon-refresh roadmap-status-progress"></span-->
+								</td>
+								<td class="function">Design Improvements</td>
+								<td>Improve the design of the web sites.</td>
+							</tr>
+						</table>
+
+						<h2>Private Beta Phase</h2>
+
+						<p>
+							In the <strong>private beta phase</strong>, the most essential functionality, introduced during alpha development is supplemented by a number of
+							additional useful features. During this phase most of the final features will be completed and tested. Also an increasing number of users is going to
+							test the service in terms of performance. A lively discussion within the private beta community is envisioned.
+						</p>
+
+						<p>
+							<i>In this phase the service will be available to a larger number of trusted users.</i>
+						</p>
+
+						<h3>Version 0.5</h3>
+						<table class="table">
+							<tr>
+								<td class="status">
+									<!-- span class="glyphicon glyphicon-refresh roadmap-status-progress"></span-->
+								</td>
+								<td class="function">Direct Search</td>
+								<td>This functionality addresses a common use case. A user has the exact location information of some text in a book (e.g. section and paragraph)
+									and wants to directly jump to the text. This could be provided as an extension to the reader.</td>
+							</tr>
+							<tr>
+								<td class="status"></td>
+								<td class="function">Paragraph Translation</td>
+								<td>Adds functionality to toggle the language of a selected passage.</td>
+							</tr>
+						</table>
+
+						<h3>Version 0.6</h3>
+						<table class="table">
+							<tr>
+								<td class="status">
+									<!-- span class="glyphicon glyphicon-refresh roadmap-status-progress"></span-->
+								</td>
+								<td class="function">Private Collections</td>
+								<td>User will be able to log in with their google accounts and save selected passages as part of collections. These collections are then saved in
+									the cloud and can be accessed from any computer or device.</td>
+							</tr>
+							<tr>
+								<td class="status"></td>
+								<td class="function">Collection Sharing</td>
+								<td>Adds social media capabilities such as sharing collections, following other user's collections an so on.</td>
+							</tr>
+						</table>
+
+						<h3>Version 0.7</h3>
+						<table class="table">
+							<tr>
+								<td class="status">
+									<!-- span class="glyphicon glyphicon-refresh roadmap-status-progress"></span-->
+								</td>
+								<td class="function">Integration</td>
+								<td>Adds functionality to integrate this service with other services. Some ideas are:
+									<ul>
+										<li>Support for Facebook and Twitter login</li>
+										<li>Download Collections as PDF or text files</li>
+										<li>Share a passage on Facebook, Google+, ...</li>
+									</ul>
+								</td>
+							</tr>
+						</table>
+
+						<h2>Public Beta Phase</h2>
+
+						<p>
+							In the <strong>public beta phase</strong>, the functionality will only be slightly extended. Instead the focus is on making the service scalable and
+							robust to an ever growing number of users. Depending on the number of users A/B testing and metrics might be used to improve user experience.
+						</p>
+
+						<p>
+							<i>In this phase the service will be publicly availabe, but still marked as beta.</i>
+						</p>
+
+						<h3>Version 0.8</h3>
+						<table class="table">
+							<tr>
+								<td class="status">
+									<!-- span class="glyphicon glyphicon-refresh roadmap-status-progress"></span-->
+								</td>
+								<td class="function">Admin Editor</td>
+								<td>This functionality allows a group of selected admins to correct errors in texts by employing a graphical user interface.</td>
+							</tr>
+							<tr>
+								<td class="status"></td>
+								<td class="function">Proof-Reading</td>
+								<td>Once texts can be changed, proof-reading functionality will allow the community to report typing errors in the text. Due to the sensitive type
+									of text that is provided by this service, the community will not be allowed to directly modify texts. Instead, the community can up or downvote change
+									requests and these requests will then be reviewed and processed by administrators in order of voting rank.</td>
+							</tr>
+						</table>
+
+						<h3>Version 0.9</h3>
+						<table class="table">
+							<tr>
+								<td class="status">
+									<!-- span class="glyphicon glyphicon-refresh roadmap-status-progress"></span-->
+								</td>
+								<td class="function">Timeline</td>
+								<td>This feature will annotate books with the time in which they were written (if available) and align this with the history of the respective
+									faith. This allows a more in-depth study of the texts in the scope of their historic context.</td>
+							</tr>
+						</table>
+
+						<h2>Official Release</h2>
+
+						<p>In this phase the focus lies on bugfixing and small changes to improve user experience. Also the community might select additional features that
+							should be added to the service.</p>
+
+						<p>
+							<i>In this phase the service will be publicly availabe.</i>
+						</p>
+
+						<h3>Version 1.0</h3>
+						<table class="table">
+							<tr>
+								<td class="status">
+									<!-- span class="glyphicon glyphicon-refresh roadmap-status-progress"></span-->
+								</td>
+								<td class="function">Release</td>
+								<td>This is not actually a feature, but rather a re-relase of 0.8 with improved performance and stability which makes it production-ready.</td>
+							</tr>
+						</table>
+
+					</div>
+
+					<!--
+0.1
+Search
+Menu
+
+0.2
+Filter
+Reader
+
+0.3
+Ranking
+Search Settings
+
+PRIVATE BETA
+
+0.4
+Direct Search
+Paragraph Translation
+
+0.5
+Private Collections
+Collection Sharing
+
+0.6
+Integration with other services
+
+PUBLIC BETA
+
+0.7
+Admin Editor
+Proof-Reading
+
+0.8
+Timeline
+
+RELEASE
+
+EXPERIMENTAL:
+Word Translation
+
+Lucene (advanced Ranking)
+
+
+-->
+
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	<script src="js/jquery-1.9.0.min.js"></script>
+	<script type="text/javascript" src="/lib/mmenu/js/jquery.mmenu.min.all.js"></script>
+	<script src="/lib/bootstrap-3.0.3/js/bootstrap.min.js"></script>
+	<script src="/lib/typeahead/typeahead.bundle.js"></script>
+	<script src="/lib/alertify-0.3.11/js/alertify.min.js"></script>
+	<script src="/lib/sprintf/js/sprintf.min.js"></script>
+	<script type="text/javascript" src="http://bp.yahooapis.com/2.4.21/browserplus-min.js"></script>
+	<!-- Load plupload and all it's runtimes and finally the jQuery queue widget -->
+	<script type="text/javascript" src="/lib/plupload-2.1.0/js/plupload.full.min.js"></script>
+	<script type="text/javascript" src="/lib/plupload-2.1.0/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+	<script type="text/javascript" src="/js/util.js"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>
