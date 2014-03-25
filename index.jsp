@@ -44,10 +44,10 @@
 		<div class="container">
 			<div class="tab-content">
 				<div class="tab-pane active" id="search">
-			  		<?php include 'search.htm'; ?>
+			  		<%@ include file="search.htm" %>
 			  	</div>
 				<div class="tab-pane" id="roadmap">
-			  		<?php include 'roadmap.htm'; ?>
+			  		<%@ include file="roadmap.htm" %>
 			  	</div>
 			</div>
 		</div>
