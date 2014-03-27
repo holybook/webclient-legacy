@@ -11,12 +11,15 @@ var es = {
         return this.client.search({
             index : "books",
             type : "en",
-            from : offset,
-            size : count,
-            fields : [ "text", "author", "title", "section_title" ],
-            query : {
-                match : {
-                    text : query
+            body : {
+                from : offset,
+                size : count,
+                fields : [ "text", "author", "title", "section_title" ],
+                query : {
+                    query_string : {
+                        default_field : "text",
+                        query : query
+                    }
                 }
             }
         }).then(function(data) {
