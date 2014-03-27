@@ -54,7 +54,7 @@
 	</div>
 	</div>
 	<script src="js/jquery-1.9.0.min.js"></script>
-	<script type="text/javascript" src="/lib/mmenu/js/jquery.mmenu.min.all.js"></script>
+	<script src="/lib/bower_components/elasticsearch/elasticsearch.jquery.js"></script>
 	<script src="/lib/bootstrap-3.0.3/js/bootstrap.min.js"></script>
 	<script src="/lib/typeahead/typeahead.bundle.js"></script>
 	<script src="/lib/alertify-0.3.11/js/alertify.min.js"></script>
@@ -64,6 +64,7 @@
 	<script type="text/javascript" src="/lib/plupload-2.1.0/js/plupload.full.min.js"></script>
 	<script type="text/javascript" src="/lib/plupload-2.1.0/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
 	<script type="text/javascript" src="/js/util.js"></script>
+	<script src="js/searchclient.js"></script>
 	<script src="js/main.js"></script>
 </body>
 </html>

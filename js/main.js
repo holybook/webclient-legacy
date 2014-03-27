@@ -10,26 +10,59 @@ var pages = 10;
 var currentPage = 1;
 var Manager;
 
-$(document).ready(function() {
-    // Add configuration for one or more providers.
+var client = es;
 
-    $("#filter").mmenu({
-        counters : {
-            add : true,
-            update : true
-        },
-        slidingSubmenus : true,
-        onClick : {
-            setSelected : false,
-            close : false
-        }
-    });
+$(document).ready(function() {
 
     $('form').submit(function(event) {
+        event.preventDefault();
         currentPage = 1;
         search();
-        event.preventDefault();
     });
+
+    // var suggestions = new Bloodhound({
+    // datumTokenizer : function(data) {
+    // console.log("datumTokenizer: ");
+    // console.log(data);
+    // return data;
+    // },
+    // queryTokenizer : function(query) {
+    // console.log("queryTokenizer: ");
+    // console.log(query);
+    // return query;
+    // },
+    // // prefetch: '../data/films/post_1960.json',
+    // remote : {
+    // url : host("/suggest?wt=json&q=%QUERY"),
+    // ajax : {
+    // contentType : "application/json",
+    // dataType : "json",
+    // method : "GET"
+    // },
+    // filter : function(response) {
+    // var sug = response.spellcheck.suggestions;
+    // var result = [];
+    // for (i in response.spellcheck.suggestions) {
+    // if (sug[i] == "collation") {
+    // result.push(sug[i + 1]);
+    // }
+    // }
+    // return result;
+    // }
+    // }
+    // });
+    //
+    // suggestions.initialize();
+    //
+    // $('#search-box').typeahead(null, {
+    // name : 'suggestions',
+    // displayKey : function(suggestion) {
+    // console.log("DisplayKey: ");
+    // console.log(suggestion);
+    // return "string";
+    // },
+    // source : suggestions.ttAdapter()
+    // });
 });
 
 function search() {
@@ -38,46 +71,23 @@ function search() {
     noResultBox.hide();
     errorBox.hide();
     loader.fadeIn(100);
-    $.ajax({
-        url : "http://" + window.location.hostname + ":8983/solr/books_en/select",
-        contentType : "application/json",
-        dataType : "jsonp",
-        jsonp : "json.wrf",
-        data : {
-            q : query,
-            start : offset,
-            rows : limit,
-            wt : "json",
-            debug : "timing",
-            hl : true
-        },
-        method : "GET",
-        success : handleSearchResult,
-        error : function(jqXHR, textStatus, errorThrown) {
-            loader.hide(200);
-            errorBox.text(errorThrown);
-            errorBox.show();
-        },
-        contentType : "application/json; charset=UTF-8"
+    client.search(query, offset, limit).then(function(data) {
+        handleSearchResult.apply(this, data);
+    }, function(err) {
+        loader.hide(200);
+        errorBox.text(err.message);
+        errorBox.show();
     });
 }
 
-function handleSearchResult(data) {
+function handleSearchResult(found, time, data) {
     loader.fadeOut(100);
-    if (data.responseHeader.status != 0) {
-        errorBox.text(data.responseHeader.status);
-        errorBox.show();
-    } else {
-        var found = data.response.numFound;
-        var time = data.debug.timing.time / 1000.0;
-
-        content.html("");
-        if (found == 0)
-            noResultBox.show();
-        fillPerformanceLabel(found, time);
-        fillPagination(found);
-        fillSearchResults(data);
-    }
+    content.html("");
+    if (found == 0)
+        noResultBox.show();
+    fillPerformanceLabel(found, time);
+    fillPagination(found);
+    fillSearchResults(data);
 }
 
 function searchPage() {
@@ -141,45 +151,20 @@ function fillPerformanceLabel(numberFound, time) {
 }
 
 function fillSearchResults(data) {
-    for (i in data.response.docs) {
-        var doc = data.response.docs[i];
-        appendSearchResult($('#content'), doc, data.highlighting[doc.id].text);
+    for (i in data) {
+        var doc = data[i];
+        appendSearchResult($('#content'), doc);
     }
 }
 
-function appendSearchResult(container, doc, text) {
+function appendSearchResult(container, doc) {
     var link = $("<a/>", {
         class : "search-result"
     }).append(
-            $("<div/>").append($('<p/>').html(text)).append(
-                    $('<p/>').append($('<small/>').append(doc["author"]).append(" - ").append(doc["title"]).append(" - ").append(doc["section_title"]))));
+            $("<div/>").append($('<p/>').html(doc.body)).append(
+                    $('<p/>').append($('<small/>').append(doc.author).append(" - ").append(doc.title).append(" - ").append(doc.section_title))));
     link.click(function() {
-        $.ajax({
-            url : "http://" + window.location.hostname + ":8983/solr/books_en/select",
-            contentType : "application/json",
-            dataType : "jsonp",
-            jsonp : "json.wrf",
-            data : {
-                q : sprintf('title:"%s"', doc.title),
-                start : 0,
-                rows : 10,
-                wt : "json",
-                debug : "timing",
-                sort : "section_index asc, index asc",
-                fl : "text"
-            },
-            method : "GET",
-            success : function(data) {
-                console.log(data);
-                // TODO: implement reader
-            },
-            error : function(jqXHR, textStatus, errorThrown) {
-                loader.hide(200);
-                errorBox.text(errorThrown);
-                errorBox.show();
-            },
-            contentType : "application/json; charset=UTF-8"
-        });
+        // TODO: Reader
     });
     container.append(link).append('<br/>');
 }
