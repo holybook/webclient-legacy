@@ -20,6 +20,13 @@ var es = {
                         default_field : "text",
                         query : query
                     }
+                },
+                highlight : {
+                    pre_tags : ["<strong>"],
+                    post_tags : ["</strong>"],
+                    fields : {
+                        text : {}
+                    }
                 }
             }
         }).then(function(data) {
@@ -32,7 +39,7 @@ var es = {
                 for (k in fields) {
                     doc[k] = fields[k][0];
                 }
-                doc.body = doc.text;
+                doc.body = data.hits.hits[i].highlight.text[0];
                 docs.push(doc);
             }
             return [ found, time, docs ];
