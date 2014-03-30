@@ -54,6 +54,7 @@
 	</div>
 	</div>
 	<script src="js/jquery-1.9.0.min.js"></script>
+	<script src="/lib/bower_components/doT/doT.js"></script>
 	<script src="/lib/bower_components/elasticsearch/elasticsearch.jquery.js"></script>
 	<script src="/lib/bootstrap-3.0.3/js/bootstrap.min.js"></script>
 	<script src="/lib/typeahead/typeahead.bundle.js"></script>
