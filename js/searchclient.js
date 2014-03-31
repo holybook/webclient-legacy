@@ -3,32 +3,25 @@
  */
 var es = {
 
+    host : function(path) {
+        return "http://" + window.location.hostname + ":" + window.location.port + "/es" + path;
+    },
+
     client : new $.es.Client({
         hosts : "http://" + window.location.hostname + ":" + window.location.port + "/es"
     }),
 
     search : function(query, offset, count) {
-        return this.client.search({
-            index : "books",
-            type : "en",
-            body : {
+        return $.ajax({
+            url : this.host("/_public/search"),
+            contentType : "application/json",
+            dataType : "json",
+            data : {
+                q : query,
                 from : offset,
-                size : count,
-                fields : [ "text", "author", "title", "section_title" ],
-                query : {
-                    query_string : {
-                        default_field : "text",
-                        query : query
-                    }
-                },
-                highlight : {
-                    pre_tags : ["<strong>"],
-                    post_tags : ["</strong>"],
-                    fields : {
-                        text : {}
-                    }
-                }
-            }
+                size : count
+            },
+            method : "GET"
         }).then(function(data) {
             var found = data.hits.total;
             var time = data.took / 1000.0;
