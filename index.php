@@ -34,6 +34,7 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="#search" data-toggle="tab">Search</a></li>
+				<li><a href="#read" data-toggle="tab">Read</a></li>
 				<li><a href="#roadmap" data-toggle="tab">Roadmap</a></li>
 			</ul>
 		</div>
@@ -45,6 +46,9 @@
 			<div class="tab-content">
 				<div class="tab-pane active" id="search">
 			  		<?php include 'search.htm'; ?>
+			  	</div>
+			  	<div class="tab-pane" id="read">
+			  		<?php include 'read.htm'; ?>
 			  	</div>
 				<div class="tab-pane" id="roadmap">
 			  		<?php include 'roadmap.htm'; ?>
@@ -66,6 +70,8 @@
 	<script type="text/javascript" src="/lib/plupload-2.1.0/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
 	<script type="text/javascript" src="/js/util.js"></script>
 	<script src="js/searchclient.js"></script>
+	<script src="js/search.js"></script>
+	<script src="js/read.js"></script>
 	<script src="js/main.js"></script>
 </body>
 </html>
