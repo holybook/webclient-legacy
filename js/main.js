@@ -20,13 +20,6 @@ $(document).ready(function() {
         search();
     });
 
-    $("#switch-search").click(function() {
-       if (client == es) {
-           client = solr;
-       } else {
-           client = es;
-       }
-    });
 
     // var suggestions = new Bloodhound({
     // datumTokenizer : function(data) {
