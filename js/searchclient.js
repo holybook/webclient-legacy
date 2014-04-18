@@ -39,6 +39,22 @@ var es = {
         }, function(err) {
             return err;
         });
+    },
+
+    toc : function() {
+        return $.ajax({
+            url : this.host("/_public/books/en"),
+            contentType : "application/json",
+            method : "GET"
+        });
+    },
+
+    book : function(language, religion, author, title) {
+        return $.ajax({
+            url : this.host(sprintf("/_public/book/%s/%s/%s/%s")),
+            contentType : "application/json",
+            method : "GET"
+        });
     }
 
 };

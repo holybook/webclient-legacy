@@ -1,7 +1,74 @@
 function initRead() {
+
+    var renderObjects = doT.template(
+        '{{ for (var e in it) { }} \
+             <li><a>{{=e}}</a></li> \
+         {{ } }}');
+
+    var renderTabHeader = doT.template(
+        '<a href="#{{=it.encoded}}" data-toggle="tab">{{=it.name}}</a>'
+    );
+
+    var renderTab = doT.template(
+        '<div class="tab-pane" id="{{=it.encoded}}"> \
+         </div>'
+    );
+
+    client.toc().then(function (data) {
+        var $religions = $("#religion");
+        var $authors = $("#author");
+        var $books = $("#book");
+
+        var selection = {};
+        var next = {
+            "religion": $authors,
+            "author": $books
+        };
+
+        function fill($div, obj) {
+            $div.html(renderObjects(obj));
+            var $firstChild = $div.find("li:nth-child(1) a");
+
+            $div.find("a").click(function () {
+                select($div, $(this), obj);
+            });
+
+            select($div, $firstChild, obj);
+        }
+
+        function select($div, $a, objects) {
+            var id = $div.attr("id");
+            var obj = objects[$a.text()];
+            selection[id] = $a.text();
+            // set active:
+            $div.find(".active").removeClass("active");
+            $a.parent().addClass("active");
+
+            var $next = next[id];
+            if (typeof($next) != 'undefined') {
+                fill($next, obj);
+            }
+        }
+
+        fill($("#religion"), data);
+
+        $("#open-book").click(function () {
+            var $tabHeader = $("<li/>");
+            var sel = {
+                name: selection["book"],
+                encoded: base64.encode(selection["book"], true)
+            };
+            $tabHeader.html(renderTabHeader(sel)).insertBefore($("#add-tab"));
+            $tabHeader.children().first().tab();
+            $("#book-tabs").append(renderTab(sel));
+            $('#dialog-browse').modal('hide');
+        });
+    });
+
+
     // 1. Compile template function
     var tempFn = doT
-            .template("{{~it.book.sections :s:si}}        \
+        .template("{{~it.book.sections :s:si}}        \
                 <div>                           \
                     <h3>{{=s.title}}</h3>       \
                     {{~s.text :t:i}}            \
@@ -11,15 +78,16 @@ function initRead() {
              {{~}}");
     // 2. Use template function as many times as you like
     var resultText = tempFn({
-        "took" : 83,
-        "paragraphs" : 36,
-        "book" : {
-            "language" : "en",
-            "author" : "Abdul_Baha",
-            "title" : "Tablet to August Forel",
-            "sections" : [ {
-                "title" : "‘ABDU’L-BAHÁ’S TABLET TO DR. FOREL",
-                "text" : [
+        "took": 83,
+        "paragraphs": 36,
+        "book": {
+            "language": "en",
+            "author": "Abdul_Baha",
+            "title": "Tablet to August Forel",
+            "sections": [
+                {
+                    "title": "‘ABDU’L-BAHÁ’S TABLET TO DR. FOREL",
+                    "text": [
                         "O revered personage, lover of truth! Thy letter dated 28 July 1921 hath been received. The contents thereof were most pleasing and indicated that, praised be the Lord, thou art as yet young, and searchest after truth, that thy power of thought is strong and the discoveries of thy mind manifest.",
                         "Numerous copies of the epistle I had written to Dr. F. are spread far and wide and every one knoweth that it hath been revealed in the year 1910. Apart from this, numerous epistles have been written before the war upon the same theme, and reference, too, hath been made to these questions in the Journal of the San Francisco University, the date whereof is known beyond any doubt. In like manner have the philosophers of broad vision praised highly the discourse eloquently delivered in the above-named University. A copy of that paper is thus enclosed and forwarded. Thy works are no doubt of great benefit, and if published, send us a copy of each.",
                         "By materialists, whose belief with regard to Divinity hath been explained, is not meant philosophers in general, but rather that group of materialists of narrow vision who worship that which is sensed, who depend upon the five senses only, and whose criterion of knowledge is limited to that which can be perceived by the senses. All that can be sensed is to them real, whilst whatever falleth not under the power of the senses is either unreal or doubtful. The existence of the Deity they regard as wholly doubtful.",
@@ -56,9 +124,11 @@ function initRead() {
                         "In short, all sections and parties have their aspirations realized in the teachings of Bahá’u’lláh. As these teachings are declared in churches, in mosques and in other places of worship, whether those of the followers of Buddha or of Confucius, in political circles or amongst materialists, all shall bear witness that these teachings bestow a fresh life upon mankind and constitute the immediate remedy for all the ills of social life. None can find fault with any of these teachings, nay rather, once declared they will all be acclaimed, and all will confess their vital necessity, exclaiming, ‘Verily this is the truth and naught is there beside the truth but manifest error.’",
                         "In conclusion, these few words are written, and unto everyone they will be a clear and conclusive evidence of the truth. Ponder them in thine heart. The will of every sovereign prevaileth during his reign, the will of every philosopher findeth expression in a handful of disciples during his lifetime, but the Power of the Holy Spirit shineth radiantly in the realities of the Messengers of God, and strengtheneth Their will in such wise as to influence a great nation for thousands of years and to regenerate the human soul and revive mankind. Consider how great is this power! It is an extraordinary Power, an all-sufficient proof of the truth of the mission of the Prophets of God, and a conclusive evidence of the power of Divine Inspiration.",
                         "The Glory of Glories rest upon thee. Haifa, 21 September 1921." ]
-            } ]
+                }
+            ]
         }
     });
 
     $("#test").append(resultText);
 }
+

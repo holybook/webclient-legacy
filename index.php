@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="/lib/alertify-0.3.11/css/alertify.core.css" />
 <link rel="stylesheet" href="/lib/alertify-0.3.11/css/alertify.default.css" />
 <link rel="stylesheet" href="/lib/plupload-2.1.0/js/jquery.plupload.queue/css/jquery.plupload.queue.css" />
+<link rel="stylesheet" href="/lib/bower_components/bootstrap-select/bootstrap-select.css" />
 <link href="/css/main.css" rel="stylesheet" media="screen">
 </head>
 <body>
@@ -57,17 +58,17 @@
 		</div>
 	</div>
 	</div>
-	<script src="js/jquery-1.9.0.min.js"></script>
+	<script src="/lib/bower_components/jquery/jquery.js"></script>
+	<script src="/lib/bower_components/jquery-option-tree/jquery-option-tree.js"></script>
 	<script src="/lib/bower_components/doT/doT.js"></script>
 	<script src="/lib/bower_components/elasticsearch/elasticsearch.jquery.js"></script>
 	<script src="/lib/bootstrap-3.0.3/js/bootstrap.min.js"></script>
+	<script src="/lib/bower_components/bootstrap-select/bootstrap-select.js"></script>
 	<script src="/lib/typeahead/typeahead.bundle.js"></script>
 	<script src="/lib/alertify-0.3.11/js/alertify.min.js"></script>
 	<script src="/lib/sprintf/js/sprintf.min.js"></script>
 	<script type="text/javascript" src="http://bp.yahooapis.com/2.4.21/browserplus-min.js"></script>
-	<!-- Load plupload and all it's runtimes and finally the jQuery queue widget -->
-	<script type="text/javascript" src="/lib/plupload-2.1.0/js/plupload.full.min.js"></script>
-	<script type="text/javascript" src="/lib/plupload-2.1.0/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+    <script src="/lib/bower_components/base64js/base64.js"></script>
 	<script type="text/javascript" src="/js/util.js"></script>
 	<script src="js/searchclient.js"></script>
 	<script src="js/search.js"></script>

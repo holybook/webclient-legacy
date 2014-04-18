@@ -1,0 +1,21 @@
+{
+  "name": "base64js",
+  "version": "1.0.0",
+  "main": "base64.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
+  "homepage": "https://github.com/zandroid/base64js",
+  "_release": "1.0.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.0.0",
+    "commit": "503f35fc63052abdf302986737f49df60d6321c8"
+  },
+  "_source": "git://github.com/zandroid/base64js.git",
+  "_target": "~1.0.0",
+  "_originalSource": "base64js",
+  "_direct": true
+}
