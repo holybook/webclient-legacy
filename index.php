@@ -69,6 +69,7 @@
 	<script src="/lib/sprintf/js/sprintf.min.js"></script>
 	<script type="text/javascript" src="http://bp.yahooapis.com/2.4.21/browserplus-min.js"></script>
     <script src="/lib/bower_components/base64js/base64.js"></script>
+    <script src="/lib/bower_components/jquery-knob/js/jquery.knob.js"></script>
 	<script type="text/javascript" src="/js/util.js"></script>
 	<script src="js/searchclient.js"></script>
 	<script src="js/search.js"></script>
