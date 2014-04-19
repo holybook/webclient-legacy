@@ -112,9 +112,10 @@ function initRead() {
                 var $book = $(bookId);
                 $book.html(renderBook(data));
                 $book.find(bookId + "_menu_content a").on('shown.bs.tab', function (e) {
-                    console.log(e.target);
                     $book.find(".panel-title a").text(e.target.innerText);
-                    $book.find(bookId + "_menu_content").collapse('hide');
+                    if (typeof(e.relatedTarget) != 'undefined') {
+                        $book.find(bookId + "_menu_content").collapse('hide');
+                    }
                 });
                 $book.find("li:nth-child(1) a").tab('show');
             });
