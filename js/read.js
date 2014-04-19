@@ -39,7 +39,7 @@ function initRead() {
                 </div> \
             </div> \
             </div> \
-            <div class="tab-content" id="book-tabs"> \
+            <div class="tab-content" id="{{=id}}_content"> \
                 {{~it.book.sections :s:si}}   \
                     {{ var sid = base64.encode(s.title, true); }} \
                     <div class="tab-pane" id="{{=sid}}">                           \
@@ -91,9 +91,10 @@ function initRead() {
 
         $("#open-book").click(function () {
             var $tabHeader = $("<li/>");
+            var encodedBookTitle = base64.encode(selection.book, true);
             var sel = {
                 name: selection.book,
-                encoded: base64.encode(selection.book, true)
+                encoded: encodedBookTitle
             };
             $tabHeader.html(renderTabHeader(sel)).insertBefore($("#add-tab"));
             var $a = $tabHeader.children().first();
