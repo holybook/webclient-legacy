@@ -21,7 +21,7 @@ function initRead() {
 
     var renderBook = doT.template('\
             {{ var id = base64.encode(it.book.title, true); }} \
-            <div class="panel-group" id="{{=id}}_menu_header"> \
+            <div class="panel-group section-menu" id="{{=id}}_menu_header"> \
                 <div class="panel panel-default"> \
                 <div class="panel-heading">       \
                     <h4 class="panel-title">    \
@@ -30,9 +30,9 @@ function initRead() {
                 </div> \
                 <div id="{{=id}}_menu_content" class="panel-collapse collapse"> \
                     <div class="panel-body"> \
-                        <ul> \
+                        <ul class="nav"> \
                         {{~it.book.sections :s:si}} \
-                            <li><a href="#{{= base64.encode(s.title, true) }}" data-toggle="tab">{{= s.title }}</a></li>\
+                            <li><a href="#{{= base64.encode(s.title, true) }}" data-toggle="tab">{{=(si+1)}}. {{= s.title }}</a></li>\
                         {{~}} \
                         </ul> \
                     </div> \
@@ -40,11 +40,12 @@ function initRead() {
             </div> \
             </div> \
             <div class="tab-content" id="book-tabs"> \
-                {{~it.book.sections :s:si}}        \
-                    <div class="tab-pane" id="{{= base64.encode(s.title, true) }}">                           \
+                {{~it.book.sections :s:si}}   \
+                    {{ var sid = base64.encode(s.title, true); }} \
+                    <div class="tab-pane" id="{{=sid}}">                           \
                         <h3>{{=s.title}}</h3>       \
                         {{~s.text :t:i}}            \
-                          <p>{{=t}}</p>               \
+                          <p id="{{=sid}}_{{=i}}">{{=t}}</p>               \
                         {{~}}                       \
                     </div>                          \
                 {{~}}\
