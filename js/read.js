@@ -20,14 +20,35 @@ function initRead() {
     );
 
     var renderBook = doT.template('\
-            {{~it.book.sections :s:si}}        \
-                <div>                           \
-                    <h3>{{=s.title}}</h3>       \
-                    {{~s.text :t:i}}            \
-                      <p>{{=t}}</p>               \
-                    {{~}}                       \
-                </div>                          \
-            {{~}}');
+            {{ var id = base64.encode(it.book.title, true); }} \
+            <div class="panel-group" id="{{=id}}_menu_header"> \
+                <div class="panel panel-default"> \
+                <div class="panel-heading">       \
+                    <h4 class="panel-title">    \
+                        <a data-toggle="collapse" data-parent="#{{=id}}_menu_header" href="#{{=id}}_menu_content" id="#{{=id}}_menu_link"></a> \
+                    </h4> \
+                </div> \
+                <div id="{{=id}}_menu_content" class="panel-collapse collapse"> \
+                    <div class="panel-body"> \
+                        <ul> \
+                        {{~it.book.sections :s:si}} \
+                            <li><a href="#{{= base64.encode(s.title, true) }}" data-toggle="tab">{{= s.title }}</a></li>\
+                        {{~}} \
+                        </ul> \
+                    </div> \
+                </div> \
+            </div> \
+            </div> \
+            <div class="tab-content" id="book-tabs"> \
+                {{~it.book.sections :s:si}}        \
+                    <div class="tab-pane" id="{{= base64.encode(s.title, true) }}">                           \
+                        <h3>{{=s.title}}</h3>       \
+                        {{~s.text :t:i}}            \
+                          <p>{{=t}}</p>               \
+                        {{~}}                       \
+                    </div>                          \
+                {{~}}\
+            </div>');
 
     client.toc().then(function (data) {
         var $religions = $("#religion");
@@ -78,14 +99,22 @@ function initRead() {
             $("#book-tabs").append(renderTab(sel));
             $('#dialog-browse').modal('hide');
             $(".dial").knob({
-                readOnly : true,
-                width : 40
+                readOnly: true,
+                width: 40
             });
 
-            client.book("en", selection.religion, selection.author, selection.book, function(percent) {
-                $(".dial").val(percent*100).trigger('change');
-            }).then(function(data) {
-                $("#" + base64.encode(data.book.title, true)).html(renderBook(data));
+            client.book("en", selection.religion, selection.author, selection.book, function (percent) {
+                $(".dial").val(percent * 100).trigger('change');
+            }).then(function (data) {
+                var bookId = "#" + base64.encode(data.book.title, true);
+                var $book = $(bookId);
+                $book.html(renderBook(data));
+                $book.find(bookId + "_menu_content a").on('shown.bs.tab', function (e) {
+                    console.log(e.target);
+                    $book.find(".panel-title a").text(e.target.innerText);
+                    $book.find(bookId + "_menu_content").collapse('hide');
+                });
+                $book.find("li:nth-child(1) a").tab('show');
             });
 
             $a.tab('show');
