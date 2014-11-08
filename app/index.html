@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en" ng-app="holybook">
+<head>
+    <meta charset="utf-8">
+    <title>My HTML File</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="css/app.css">
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="js/controllers.js"></script>
+</head>
+<body ng-controller="SearchController">
+
+    <div>
+        <a ng-repeat="s in searchResults" class="search-result">
+            <div>
+                <p>{{s.body}}</p>
+                <p>
+                    <small>{{s.author}} - {{s.title}} - {{s.section_title}}</small>
+                </p>
+            </div>
+        </a>
+    </div>
+
+</body>
+</html>
