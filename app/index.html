@@ -11,11 +11,11 @@
 <body ng-controller="SearchController">
 
     <div>
-        <a ng-repeat="s in searchResults" class="search-result">
+        <a ng-repeat="s in search.results" class="search-result">
             <div>
-                <p>{{s.body}}</p>
+                <div ng-bind-html-unsafe="s.body" />
                 <p>
-                    <small>{{s.author}} - {{s.title}} - {{s.section_title}}</small>
+                    <small>{{s.author}} - {{s.title}} - {{s.section.title}}</small>
                 </p>
             </div>
         </a>
