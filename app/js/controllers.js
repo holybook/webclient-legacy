@@ -1,11 +1,6 @@
-var holybook = angular.module('holybook', ['ngSanitize']);
+var controllers = angular.module('controllers', ['ngSanitize']);
 
-holybook.config(function($httpProvider) {
-    //Enable cross domain calls
-    $httpProvider.defaults.useXDomain = true;
-});
-
-holybook.controller('SearchController', ['$scope', '$http',
+controllers.controller('SearchController', ['$scope', '$http',
     function ($scope, $http) {
         $http.get("http://localhost:9200/_public/search", {
             params : {
@@ -14,5 +9,11 @@ holybook.controller('SearchController', ['$scope', '$http',
         }).success(function(data) {
             $scope.search = data;
         });
+    }
+]);
+
+controllers.controller('BookController', ['$scope', '$routeParams',
+    function($scope, $routeParams) {
+        $scope.book.id = $routeParams.id;
     }
 ]);

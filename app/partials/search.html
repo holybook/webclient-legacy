@@ -28,7 +28,16 @@
 	<div class="col-xs-12 col-lg-offset-2 col-lg-8">
 		<div class="alert alert-warning" id="no-result">No results found.</div>
 		<div class="alert alert-danger" id="error">No results found.</div>
-		<div id="content"></div>
+		<div id="content">
+            <a ng-repeat="s in search.results" class="search-result">
+                <div>
+                    <div ng-bind-html="s.body"></div>
+                    <p>
+                        <small>{{s.author}} - {{s.title}} - {{s.section.title}}</small>
+                    </p>
+                </div>
+            </a>
+		</div>
 	</div>
 </div>
 
