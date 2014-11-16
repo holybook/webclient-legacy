@@ -1,4 +1,4 @@
-var holybook = angular.module('holybook', []);
+var holybook = angular.module('holybook', ['ngSanitize']);
 
 holybook.config(function($httpProvider) {
     //Enable cross domain calls

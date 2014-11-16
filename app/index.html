@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="css/app.css">
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="js/controllers.js"></script>
 </head>
 <body ng-controller="SearchController">
@@ -13,7 +14,7 @@
     <div>
         <a ng-repeat="s in search.results" class="search-result">
             <div>
-                <div ng-bind-html-unsafe="s.body" />
+                <div ng-bind-html="s.body"></div>
                 <p>
                     <small>{{s.author}} - {{s.title}} - {{s.section.title}}</small>
                 </p>
