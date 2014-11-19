@@ -1,32 +1,28 @@
-module.exports = function(config){
+'use strict';
+
+module.exports = function(config) {
+
   config.set({
+    basePath : '..', //!\\ Ignored through gulp-karma //!\\
 
-    basePath : '../',
-
-    files : [
-      'app/bower_components/angular/angular.js',
-      'app/bower_components/angular-route/angular-route.js',
-      'app/bower_components/angular-mocks/angular-mocks.js',
-      'app/js/**/*.js',
-      'test/unit/**/*.js'
+    files : [ //!\\ Ignored through gulp-karma //!\\
+        'src/bower_components/angular/angular.js',
+        'src/bower_components/angular/angular-route.js',
+        'src/bower_components/angular-mocks/angular-mocks.js',
+        'src/{app,components}/** /*.js',
+        'test/unit/** /*.js'
     ],
 
-    autoWatch : true,
+    autoWatch : false,
 
     frameworks: ['jasmine'],
 
-    browsers : ['Chrome'],
+    browsers : ['PhantomJS'],
 
     plugins : [
-            'karma-chrome-launcher',
-            'karma-firefox-launcher',
-            'karma-jasmine'
-            ],
-
-    junitReporter : {
-      outputFile: 'test_out/unit.xml',
-      suite: 'unit'
-    }
-
+        'karma-phantomjs-launcher',
+        'karma-jasmine'
+    ]
   });
+
 };
