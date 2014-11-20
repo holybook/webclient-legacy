@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('holybook', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.bootstrap', 'ui.router'])
+angular.module('holybook', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.bootstrap', 'ui.router', 'angularUtils.directives.dirPagination'])
     .config(function ($stateProvider, $urlRouterProvider) {
 
         $urlRouterProvider.otherwise("/search");

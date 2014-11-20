@@ -1,35 +1,30 @@
 <form role="search">
     <div class="row">
         <div class="input-group col-xs-12 col-md-offset-2 col-md-8">
-            <!-- <span class="input-group-btn">
-                <a class="btn btn-primary" id="switch-search"><span class="glyphicon glyphicon-th-list"></span></a>
-            </span> -->
-            <input type="text" class="form-control" id="search-box" ng-model="query">
-        <span class="input-group-btn" style="max-width: 200px;">
-            <button type="submit" class="btn" id="search-button" ng-click="search()">Search</button>
-        </span>
+            <input type="text" class="form-control" ng-model="query">
+            <span class="input-group-btn" style="max-width: 200px;">
+                <button type="submit" class="btn" ng-click="search(1)">Search</button>
+            </span>
         </div>
     </div>
 </form>
 
 <div class="row">
-    <div class="col-xs-12 col-md-offset-2 performance-label">
-        <small></small>
+    <div class="col-xs-12 col-md-offset-2 performance-label" ng-hide="!hasResult" >
+        <small>{{searchResult.hits}} {{searchResult.hits > 1 ? 'results' : 'result'}} ({{searchResult.took*0.001}} seconds)</small>
     </div>
 </div>
 <div class="row">
     <div class="col-xs-12 col-md-offset-2">
-        <ul class="pagination">
-        </ul>
+        <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
     </div>
 </div>
 
 <div class="row">
     <div class="col-xs-12 col-lg-offset-2 col-lg-8">
-        <div class="alert alert-warning" id="no-result">No results found.</div>
-        <div class="alert alert-danger" id="error">No results found.</div>
+        <div class="alert alert-warning" ng-hide="!hasResult || searchResult.hits > 0">No results found.</div>
         <div id="content">
-            <a ng-repeat="s in searchResult.results" class="search-result">
+            <a dir-paginate="s in searchResult.results | itemsPerPage: searchResultsPerPage" class="search-result" total-items="searchResult.hits">
                 <div>
                     <div ng-bind-html="s.body"></div>
                     <p>
