@@ -10,9 +10,9 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-            <li ng-class="menuClass('/')"><a href="#search" data-toggle="tab">Search</a></li>
-            <li ng-class="menuClass('/book')"><a href="#book" data-toggle="tab">Read</a></li>
-            <li ng-class="menuClass('/roadmap')"><a href="#roadmap" data-toggle="tab">Roadmap</a></li>
+            <li ng-class="menuClass('search')"><a ui-sref="search" data-toggle="tab">Search</a></li>
+            <li ng-class="menuClass('book')"><a ui-sref="book.browser" data-toggle="tab">Read</a></li>
+            <li ng-class="menuClass('roadmap')"><a ui-sref="roadmap" data-toggle="tab">Roadmap</a></li>
         </ul>
     </div>
     <!-- /.navbar-collapse -->

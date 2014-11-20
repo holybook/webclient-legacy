@@ -1,26 +1,34 @@
 'use strict';
 
-angular.module('holybook', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngRoute', 'ui.bootstrap'])
-    .config(function ($routeProvider) {
+angular.module('holybook', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.bootstrap', 'ui.router'])
+    .config(function ($stateProvider, $urlRouterProvider) {
 
-        $routeProvider.
-            when('/', {
+        $urlRouterProvider.otherwise("/search");
+
+        $stateProvider
+            .state('search', {
+                url: '/search',
                 templateUrl: 'app/search/search.html',
                 controller: 'Search'
-            }).
-            when('/book', {
+            })
+            .state('book', {
+                abstract: true,
+                url: '/book',
+                templateUrl: 'app/reader/reader.html'
+            })
+            .state('book.browser', {
+                url: "/",
                 templateUrl: 'app/reader/book.browser.html',
                 controller: 'BookBrowser'
-            }).
-            when('/book/:id', {
+            })
+            .state('book.reader', {
+                url: "/:id",
                 templateUrl: 'app/reader/book.reader.html',
                 controller: 'BookReader'
-            }).
-            when('/roadmap', {
+            })
+            .state('roadmap', {
+                url: '/roadmap',
                 templateUrl: 'app/roadmap/roadmap.html'
-            }).
-            otherwise({
-                redirectTo: '/'
             });
 
     }

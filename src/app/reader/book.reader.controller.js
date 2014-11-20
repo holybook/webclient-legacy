@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('holybook').controller('BookReader',
-    function ($scope, $routeParams) {
+    function ($scope, $stateParams) {
         $scope.book = {
-            id: $routeParams.id
+            id: $stateParams.id
         };
     }
 );
