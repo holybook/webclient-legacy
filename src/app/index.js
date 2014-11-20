@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('holybook', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.bootstrap', 'ui.router', 'angularUtils.directives.dirPagination'])
-    .config(function ($stateProvider, $urlRouterProvider) {
+angular.module('holybook', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.bootstrap', 'ui.router', 'angularUtils.directives.dirPagination', 'angular-loading-bar'])
+    .config(function ($stateProvider, $urlRouterProvider, cfpLoadingBarProvider) {
 
         $urlRouterProvider.otherwise("/search");
 
@@ -30,6 +30,8 @@ angular.module('holybook', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
                 url: '/roadmap',
                 templateUrl: 'app/roadmap/roadmap.html'
             });
+
+        cfpLoadingBarProvider.includeSpinner = false;
 
     }
 );
