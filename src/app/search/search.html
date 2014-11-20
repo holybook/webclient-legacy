@@ -4,9 +4,9 @@
             <!-- <span class="input-group-btn">
                 <a class="btn btn-primary" id="switch-search"><span class="glyphicon glyphicon-th-list"></span></a>
             </span> -->
-            <input type="text" class="form-control" id="search-box">
+            <input type="text" class="form-control" id="search-box" ng-model="query">
         <span class="input-group-btn" style="max-width: 200px;">
-            <button type="submit" class="btn" id="search-button">Search</button>
+            <button type="submit" class="btn" id="search-button" ng-click="search()">Search</button>
         </span>
         </div>
     </div>
@@ -29,7 +29,7 @@
         <div class="alert alert-warning" id="no-result">No results found.</div>
         <div class="alert alert-danger" id="error">No results found.</div>
         <div id="content">
-            <a ng-repeat="s in search.results" class="search-result">
+            <a ng-repeat="s in searchResult.results" class="search-result">
                 <div>
                     <div ng-bind-html="s.body"></div>
                     <p>
