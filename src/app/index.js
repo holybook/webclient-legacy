@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('holybook', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.bootstrap', 'ui.router', 'angularUtils.directives.dirPagination', 'angular-loading-bar'])
-    .config(function ($stateProvider, $urlRouterProvider, cfpLoadingBarProvider) {
+angular.module('holybook', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.bootstrap', 'ui.router', 'angularUtils.directives.dirPagination', 'angular-loading-bar', 'errors'])
+    .config(function ($httpProvider, $stateProvider, $urlRouterProvider, cfpLoadingBarProvider) {
 
-        $urlRouterProvider.otherwise("/search");
+        $urlRouterProvider.otherwise('/search');
 
         $stateProvider
             .state('search', {
@@ -17,12 +17,12 @@ angular.module('holybook', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
                 templateUrl: 'app/reader/reader.html'
             })
             .state('book.browser', {
-                url: "/",
+                url: '/',
                 templateUrl: 'app/reader/book.browser.html',
                 controller: 'BookBrowser'
             })
             .state('book.reader', {
-                url: "/:id",
+                url: '/:id',
                 templateUrl: 'app/reader/book.reader.html',
                 controller: 'BookReader'
             })
@@ -36,8 +36,8 @@ angular.module('holybook', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
     }
 );
 
-if (typeof String.prototype.startsWith != 'function') {
+if (typeof String.prototype.startsWith !== 'function') {
     String.prototype.startsWith = function (str){
-        return this.slice(0, str.length) == str;
+        return this.slice(0, str.length) === str;
     };
 }

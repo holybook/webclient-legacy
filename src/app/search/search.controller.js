@@ -23,10 +23,10 @@ angular.module('holybook').controller('Search',
                 $scope.pagination.current = page;
                 $scope.hasResult = true;
             });
-        }
+        };
 
         $scope.pageChanged = function(newPage) {
-            if (newPage != $scope.pagination.current) {
+            if (newPage !== $scope.pagination.current) {
                 $scope.search(newPage);
             }
         };
