@@ -1,0 +1,40 @@
+<form role="search">
+    <div class="row">
+        <div class="input-group col-xs-12 col-md-offset-2 col-md-8">
+            <input type="text" class="form-control" ng-model="query">
+            <span class="input-group-btn" style="max-width: 200px;">
+                <button type="submit" class="btn" ng-click="search(1)">Search</button>
+            </span>
+        </div>
+    </div>
+</form>
+
+<div class="row">
+    <div class="col-xs-12 col-md-offset-2 performance-label" ng-hide="!hasResult" >
+        <small>{{ searchResult.hits }} {{ searchResult.hits > 1 ? 'results' : 'result' }} ({{ searchResult.took*0.001 | number:2 }} seconds)</small>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-md-offset-2">
+        <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-lg-offset-2 col-lg-8">
+        <alert type="warning" ng-hide="!hasResult || searchResult.hits > 0">No results found.</alert>
+        <div id="content">
+            <a dir-paginate="s in searchResult.results | itemsPerPage: searchResultsPerPage" class="search-result" total-items="searchResult.hits">
+                <div>
+                    <div ng-bind-html="s.body"></div>
+                    <p>
+                        <small>{{s.author}} - {{s.title}} - {{s.section.title}}</small>
+                    </p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
