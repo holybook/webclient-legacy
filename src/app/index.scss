@@ -81,8 +81,6 @@ body div#body {
   padding-right: 1em;
 }
 
-
-
 /* Styling of section menu in reader */
 .section-menu .panel-heading:hover {
   background-color: #efefef;
@@ -106,4 +104,37 @@ body div#body {
 
 .read-tabs li.active a:hover {
   background-color: #f5f5f5;
+}
+
+/*
+ Book formatting
+*/
+
+.book {
+    padding-left: 150px;
+    padding-right: 150px;
+    margin-top: 60px;
+}
+
+.book-title {
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    font-weight: 500;
+}
+
+.book-paragraph {
+    text-align: justify;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.book-section {
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 80px;
+}
+
+.book-section-header {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    margin-bottom: 40px;
 }
