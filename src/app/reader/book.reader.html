@@ -1,4 +1,4 @@
-<article class="book offset-xs-2 col-xs-8">
+<article class="book col-xs-offset-2 col-xs-8">
     <h1 class="book-title">{{book.title}}</h1>
     <section class="book-section" ng-repeat="s in book.sections">
         <h2 class="book-section-header">{{s.title}}</h2>
@@ -7,7 +7,7 @@
         </p>
     </section>
     <div class="book-navigation clearfix">
-        <button type="button" class="book-navigation-button col-xs-1 btn btn-default btn-lg pull-left">
+        <button type="button" class="book-navigation-button col-xs-1 btn btn-default btn-lg pull-left" ng-click="prevPage()">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true">
         </span>
         </button>
@@ -17,7 +17,7 @@
             <small>Page {{pagination.current}} of {{pagination.total}}</small>
         </div>
 
-        <button type="button" class="btn btn-default btn-lg pull-right col-xs-1">
+        <button type="button" class="btn btn-default btn-lg pull-right col-xs-1" ng-click="nextPage()">
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true">
         </span>
         </button>

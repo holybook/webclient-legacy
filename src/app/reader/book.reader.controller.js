@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('holybook').controller('BookReader',
-    function ($scope, $stateParams, api) {
+    function ($scope, $stateParams, $anchorScroll, api) {
 
         var paragraphsPerPage = 50;
         $scope.pagination = {
@@ -21,8 +21,17 @@ angular.module('holybook').controller('BookReader',
                 $scope.pagination.current = page;
                 $scope.pagination.total = Math.ceil(data.paragraphs / paragraphsPerPage);
                 $scope.hasResult = true;
+                $anchorScroll();
             });
         }
+
+        $scope.nextPage = function() {
+            getParagraphs(++$scope.pagination.current);
+        };
+
+        $scope.prevPage = function() {
+            getParagraphs(--$scope.pagination.current);
+        };
 
         $scope.pageChanged = function(newPage) {
             if (newPage !== $scope.pagination.current) {
