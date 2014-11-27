@@ -1,5 +1,5 @@
 <article class="book col-xs-offset-2 col-xs-8">
-    <h1 class="book-title">{{book.title}}</h1>
+    <h1 class="book-title" ng-show="pagination.current == 1">{{book.title}}</h1>
     <section class="book-section" ng-repeat="s in book.sections">
         <h2 class="book-section-header">{{s.title}}</h2>
         <p class="book-paragraph" ng-repeat="t in s.text">
