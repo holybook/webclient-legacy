@@ -111,20 +111,18 @@ body div#body {
 */
 
 .book {
-    padding-left: 150px;
-    padding-right: 150px;
     margin-top: 60px;
+
+    font-family: 'Open Sans', sans-serif;
 }
 
 .book-title {
-    font-family: 'Open Sans', sans-serif;
     text-align: center;
     font-weight: 500;
 }
 
 .book-paragraph {
     text-align: justify;
-    font-family: 'Open Sans', sans-serif;
 }
 
 .book-section {
@@ -134,7 +132,25 @@ body div#body {
 }
 
 .book-section-header {
-    font-family: 'Open Sans', sans-serif;
     font-weight: 300;
     margin-bottom: 40px;
+}
+
+.book-navigation {
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.book-navigation-button {
+    display: inline-block;
+}
+
+.book-navigation-description {
+    display: inline-block;
+    text-align: center;
+    height: 100%;
+}
+
+.book-navigation-description-title {
+    font-size: 120%
 }
