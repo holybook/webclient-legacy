@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('holybook').controller('Search',
-    function ($scope, $http) {
+    function ($scope, api) {
 
         $scope.hasResult = false;
 
@@ -11,18 +11,13 @@ angular.module('holybook').controller('Search',
         };
 
         $scope.search = function(page) {
-            $http.get('http://localhost:9200/_public/search', {
-                params : {
-                    q : $scope.query,
-                    from : (page - 1)*$scope.searchResultsPerPage,
-                    size : $scope.searchResultsPerPage
-
+            api.search(page, $scope.query, $scope.searchResultsPerPage).success(
+                function(data) {
+                    $scope.searchResult = data;
+                    $scope.pagination.current = page;
+                    $scope.hasResult = true;
                 }
-            }).success(function(data) {
-                $scope.searchResult = data;
-                $scope.pagination.current = page;
-                $scope.hasResult = true;
-            });
+            );
         };
 
         $scope.pageChanged = function(newPage) {

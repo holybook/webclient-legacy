@@ -1,6 +1,6 @@
 <article class="book">
-    <h1 class="book-title">{{book.title}}</h1>
-    <section class="book-section" ng-repeat="s in book.sections">
+    <h1 class="book-title">{{result.book.title}}</h1>
+    <section class="book-section" ng-repeat="s in result.book.sections">
         <h2 class="book-section-header">{{s.title}}</h2>
         <p class="book-paragraph" ng-repeat="t in s.text">
             {{t}}

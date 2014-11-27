@@ -1,16 +1,14 @@
 'use strict';
 
 angular.module('holybook').controller('BookReader',
-    function ($scope, $stateParams, $http) {
+    function ($scope, $stateParams, api) {
 
-        var path = 'http://localhost:9200/_public/book/' +
-                $stateParams.language + "/" +
-                $stateParams.religion + "/" +
-                $stateParams.author + "/" +
-                $stateParams.book;
-
-        $http.get(path).success(function(data) {
-            $scope.book = data.book;
+        $scope.result = api.book.get({
+           language : $stateParams.language,
+            religion : $stateParams.religion,
+            author : $stateParams.author,
+            title : $stateParams.title
         });
+
     }
 );
