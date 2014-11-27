@@ -1,13 +1,21 @@
 'use strict';
 
 angular.module('holybook').controller('BookReader',
-    function ($scope, $stateParams, $anchorScroll, api) {
+    function ($scope, $stateParams, $location, $anchorScroll, api) {
+
+        $scope.$watch(function () { return $location.search(); }, function() {
+            $scope.pagination = {
+                current: parseInt($location.search().page)
+            };
+            getParagraphs($scope.pagination.current);
+        });
+
+        $scope.$watch('pagination.current', function(page) {
+            $location.search('page', page);
+            getParagraphs(page);
+        });
 
         var paragraphsPerPage = 50;
-        $scope.pagination = {
-            current: 1
-        };
-
         function getParagraphs(page) {
             api.book.get({
                 language: $stateParams.language,
@@ -26,20 +34,18 @@ angular.module('holybook').controller('BookReader',
         }
 
         $scope.nextPage = function() {
-            getParagraphs(++$scope.pagination.current);
+            $location.search('page', ++$scope.pagination.current);
+
         };
 
         $scope.prevPage = function() {
-            getParagraphs(--$scope.pagination.current);
+            $location.search('page', --$scope.pagination.current);
+            //getParagraphs($scope.pagination.current);
         };
 
-        $scope.pageChanged = function(newPage) {
-            if (newPage !== $scope.pagination.current) {
-                getParagraphs(newPage);
-            }
-        };
 
-        getParagraphs(1);
+
+        //getParagraphs($scope.pagination.current);
 
     }
 );
