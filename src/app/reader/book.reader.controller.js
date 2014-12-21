@@ -66,11 +66,16 @@ angular.module('holybook').controller('BookReader',
                 insertText(text);
 
                 if (typeof($stateParams.select) !== 'undefined') {
+                    $scope.selected = $stateParams.select;
                     var paragraphElement = angular.element(document.getElementById($stateParams.select));
                     $document.scrollToElement(paragraphElement, 0, 1000);
                 }
                 $anchorScroll();
             });
+        }
+
+        $scope.absIndex = function($index) {
+            return $index + ($scope.pagination.current-1)*25;
         }
 
         $scope.nextPage = function() {
@@ -79,6 +84,10 @@ angular.module('holybook').controller('BookReader',
 
         $scope.prevPage = function() {
             $location.search('page', --$scope.pagination.current);
+        };
+
+        $scope.isSelected = function($index) {
+            return ($scope.selected == $scope.absIndex($index)) ? 'book-paragraph-selected' : ''
         };
 
     }

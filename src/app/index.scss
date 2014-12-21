@@ -1,3 +1,5 @@
+$highlight: #eef;
+
 .search-result {
   color: #111111;
 }
@@ -124,6 +126,10 @@ body div#body {
 
 .book-paragraph {
     text-align: justify;
+}
+
+.book-paragraph-selected {
+    background-color: $highlight;
 }
 
 .book-section {
