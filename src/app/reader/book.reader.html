@@ -2,7 +2,7 @@
     <h1 class="book-title" ng-show="pagination.current == 1">{{book.title}}</h1>
     <section class="book-section" ng-repeat="s in visibleSections">
         <h2 class="book-section-header" ng-class="(s.offset > 1) ? 'book-section-header-continued' : ''">{{s.title}}</h2>
-        <p class="book-paragraph" ng-repeat="t in s.text">
+        <p class="book-paragraph" id="{{ $index + (pagination.current-1)*25 }}" ng-repeat="t in s.text track by $index">
             {{t}}
         </p>
     </section>

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('holybook').controller('Search',
-    function ($scope, $state, api) {
+    function ($scope, $state, $urlRouter, api) {
 
         $scope.hasResult = false;
 
@@ -26,9 +26,9 @@ angular.module('holybook').controller('Search',
             }
         };
 
-        $scope.open = function() {
-
-        }
+        $scope.pageFromIndex = function(index) {
+            return Math.floor(index / 25) + 1; // todo link pagination configuration from reader
+        };
 
     }
 );

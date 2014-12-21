@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('holybook').controller('BookReader',
-    function ($scope, $stateParams, $location, $anchorScroll, api) {
+    function ($scope, $stateParams, $location, $anchorScroll, $document, api) {
 
         var paragraphsPerPage = 25;
 
@@ -61,26 +61,25 @@ angular.module('holybook').controller('BookReader',
                 from: (page - 1)*paragraphsPerPage,
                 size: paragraphsPerPage
             }).success(function (text) {
-                //$scope.pagination.current = page;
                 $scope.hasResult = true;
 
                 insertText(text);
 
+                if (typeof($stateParams.select) !== 'undefined') {
+                    var paragraphElement = angular.element(document.getElementById($stateParams.select));
+                    $document.scrollToElement(paragraphElement, 0, 1000);
+                }
                 $anchorScroll();
             });
         }
 
         $scope.nextPage = function() {
             $location.search('page', ++$scope.pagination.current);
-
         };
 
         $scope.prevPage = function() {
             $location.search('page', --$scope.pagination.current);
-            //getParagraphs($scope.pagination.current);
         };
-
-        //getParagraphs($scope.pagination.current);
 
     }
 );

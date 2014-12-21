@@ -1,10 +1,11 @@
 'use strict';
 
-angular.module('holybook', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.bootstrap', 'ui.router', 'angularUtils.directives.dirPagination', 'angular-loading-bar', 'errors'])
-    .config(function ($httpProvider, $stateProvider, $urlRouterProvider, cfpLoadingBarProvider) {
+angular.module('holybook', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.bootstrap', 'ui.router', 'angularUtils.directives.dirPagination', 'angular-loading-bar', 'duScroll', 'errors'])
+    .config(function ($httpProvider, $locationProvider, $stateProvider, $urlRouterProvider, cfpLoadingBarProvider) {
 
         $urlRouterProvider.otherwise('/search');
 
+        //$locationProvider.html5Mode(true);
         $stateProvider
             .state('search', {
                 url: '/search',
@@ -22,7 +23,7 @@ angular.module('holybook', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
                 controller: 'BookBrowser'
             })
             .state('book.reader', {
-                url: '/:id',
+                url: '/:id?page&select',
                 templateUrl: 'app/reader/book.reader.html',
                 controller: 'BookReader'
             })
