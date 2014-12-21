@@ -1,6 +1,6 @@
 <article class="book col-xs-offset-0 col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
     <h1 class="book-title" ng-show="pagination.current == 1">{{book.title}}</h1>
-    <section class="book-section" ng-repeat="s in book.sections">
+    <section class="book-section" ng-repeat="s in visibleSections">
         <h2 class="book-section-header" ng-class="(s.offset > 1) ? 'book-section-header-continued' : ''">{{s.title}}</h2>
         <p class="book-paragraph" ng-repeat="t in s.text">
             {{t}}

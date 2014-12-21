@@ -22,7 +22,7 @@ angular.module('holybook', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
                 controller: 'BookBrowser'
             })
             .state('book.reader', {
-                url: '/:language/:religion/:author/:title',
+                url: '/:id',
                 templateUrl: 'app/reader/book.reader.html',
                 controller: 'BookReader'
             })

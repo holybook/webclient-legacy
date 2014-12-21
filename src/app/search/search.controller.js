@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('holybook').controller('Search',
-    function ($scope, api) {
+    function ($scope, $state, api) {
 
         $scope.hasResult = false;
 
@@ -25,6 +25,10 @@ angular.module('holybook').controller('Search',
                 $scope.search(newPage);
             }
         };
+
+        $scope.open = function() {
+
+        }
 
     }
 );

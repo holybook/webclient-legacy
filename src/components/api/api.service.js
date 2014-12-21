@@ -10,7 +10,16 @@ angular.module('holybook').factory('api', function ($http, $resource) {
 
     return {
 
-        book : $resource(path('/book/:language/:religion/:author/:title')),
+        book : $resource(path('/:language/book/:id')),
+
+        text : function(args) {
+            return $http.get(path("/" + args.language +"/book/" + args.id + "/text"), {
+                params : {
+                    from : args.from,
+                    size : args.size
+                }
+            });
+        },
 
         search : function(page, query, searchResultsPerPage) {
             return $http.get(path('/search'), {
