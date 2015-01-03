@@ -72,11 +72,17 @@ angular.module('holybook').controller('BookReader',
         };
 
         BookReaderCtrl.nextPage = function() {
-            $location.search('page', ++BookReaderCtrl.pagination.current);
+            $location.search({
+                'page' : ++BookReaderCtrl.pagination.current,
+                'select' : undefined
+            });
         };
 
         BookReaderCtrl.prevPage = function() {
-            $location.search('page', --BookReaderCtrl.pagination.current);
+            $location.search({
+                'page' : --BookReaderCtrl.pagination.current,
+                'select' : undefined
+            });
         };
 
         BookReaderCtrl.isSelected = function(section, $index) {
