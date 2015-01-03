@@ -1,30 +1,36 @@
+{{ SearchCtrl.page }}
+
 <form role="search">
     <div class="row">
         <div class="input-group col-xs-12 col-md-offset-2 col-md-8">
-            <input type="text" class="form-control" ng-model="query">
+            <input type="text" class="form-control" ng-model="SearchCtrl.query">
             <span class="input-group-btn" style="max-width: 200px;">
-                <button type="submit" class="btn" ng-click="search(1)">Search</button>
+                <button type="submit" class="btn" ui-sref="search({ 'q' : query, 'page' : 1 })">Search</button>
             </span>
         </div>
     </div>
 </form>
 
 <div class="row">
-    <div class="col-xs-12 col-md-offset-2 performance-label" ng-hide="!hasResult" >
-        <small>{{ searchResult.hits }} {{ searchResult.hits > 1 ? 'results' : 'result' }} ({{ searchResult.took*0.001 | number:2 }} seconds)</small>
+    <div class="col-xs-12 col-md-offset-2 performance-label" ng-hide="!SearchCtrl.hasResult" >
+        <small>{{ SearchCtrl.result.hits }} {{ SearchCtrl.result.hits > 1 ? 'results' : 'result' }} ({{
+            SearchCtrl.result.took*0.001 | number:2 }} seconds)</small>
     </div>
 </div>
 <div class="row">
-    <div class="col-xs-12 col-md-offset-2">
-        <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+    <div class="col-xs-12 col-md-offset-2" ng-if="SearchCtrl.hasResult">
+        <pagination total-items="SearchCtrl.result.hits" items-per-page="SearchCtrl.searchResultsPerPage" ng-model="SearchCtrl.page" max-size="5" class="pagination-sm" boundary-links="true"></pagination>
     </div>
 </div>
 
 <div class="row">
     <div class="col-xs-12 col-lg-offset-2 col-lg-8">
-        <alert type="warning" ng-hide="!hasResult || searchResult.hits > 0">No results found.</alert>
+        <alert type="warning" ng-hide="!SearchCtrl.hasResult || SearchCtrl.result.hits > 0">No results found.</alert>
         <div id="content">
-            <a dir-paginate="s in searchResult.results | itemsPerPage: searchResultsPerPage" class="search-result" total-items="searchResult.hits" ui-sref="book.reader({ 'id' : s.book.id, 'page' : pageFromIndex(s.index), 'select' : s.index })" ui-sref-opts="">
+            <a ng-repeat="s in SearchCtrl.result.results"
+               class="search-result"
+               ui-sref="book.reader({ 'id' : s.book.id, 'page' : pageFromIndex(s.index), 'select' : s.index })"
+               ui-sref-opts="">
                 <div>
                     <div ng-bind-html="s.body"></div>
                     <p>

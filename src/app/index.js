@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('holybook', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.bootstrap', 'ui.router', 'angularUtils.directives.dirPagination', 'angular-loading-bar', 'duScroll', 'errors'])
+angular.module('holybook', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.bootstrap', 'ui.router', 'angular-loading-bar', 'duScroll', 'errors'])
     .config(function ($httpProvider, $locationProvider, $stateProvider, $urlRouterProvider, cfpLoadingBarProvider) {
 
         $urlRouterProvider.otherwise('/search');
@@ -8,9 +8,10 @@ angular.module('holybook', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
         //$locationProvider.html5Mode(true);
         $stateProvider
             .state('search', {
-                url: '/search',
+                url: '/search?q&page',
                 templateUrl: 'app/search/search.html',
-                controller: 'Search'
+                controller: 'Search',
+                reloadOnSearch: false
             })
             .state('book', {
                 abstract: true,
