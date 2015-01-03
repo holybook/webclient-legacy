@@ -45,7 +45,7 @@ angular.module('holybook').controller('Search',
             if (page) {
                 search();
             }
-        });
+        }, parseInt);
 
         return $scope.SearchCtrl = SearchCtrl;
 
