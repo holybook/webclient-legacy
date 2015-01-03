@@ -2,7 +2,7 @@
     <h1 class="book-title" ng-show="BookReaderCtrl.pagination.current == 1">{{BookReaderCtrl.book.title}}</h1>
     <section class="book-section" ng-repeat="s in BookReaderCtrl.visibleSections">
         <h2 class="book-section-header" ng-class="(s.offset > 1) ? 'book-section-header-continued' : ''">{{s.title}}</h2>
-        <p class="book-paragraph" ng-class="BookReaderCtrl.isSelected($index)" id="{{ BookReaderCtrl.absIndex($index) }}" ng-repeat="t in s.text track by $index">
+        <p class="book-paragraph" ng-class="BookReaderCtrl.selectedClass(s, $index)" ng-repeat="t in s.text track by $index"  scroll-offset="0" scroll-when="BookReaderCtrl.isSelected(s, $index)">
             {{t}}
         </p>
     </section>

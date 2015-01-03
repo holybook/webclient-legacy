@@ -31,16 +31,18 @@ angular.module('holybook').controller('BookReader',
             var startIndex = (BookReaderCtrl.pagination.current - 1)*paragraphsPerPage;
             var endIndex = startIndex + paragraphsPerPage;
             BookReaderCtrl.visibleSections = Lazy(BookReaderCtrl.book.sections).reduce(function(agg, section) {
-                if (section.start <= startIndex && section.end >= startIndex) {
+                if (section.start <= startIndex && section.end > startIndex) {
                     agg.push({
+                        'start' : section.start,
                         'offset' : startIndex - section.start,
-                        'text' : text.slice(0, Math.min(section.end, endIndex)),
+                        'text' : text.slice(0, Math.min(section.end, endIndex) - startIndex),
                         'title' : section.title
                     });
                 } else if (section.start >= startIndex && section.start < endIndex) {
                     agg.push({
+                        'start' : section.start,
                        'offset' : 0,
-                        'text' : text.slice(section.start - startIndex, Math.min(section.end, endIndex)),
+                        'text' : text.slice(section.start - startIndex, Math.min(section.end, endIndex) - startIndex),
                         'title' : section.title
                     });
                 }
@@ -61,15 +63,12 @@ angular.module('holybook').controller('BookReader',
 
                 if (typeof($stateParams.select) !== 'undefined') {
                     BookReaderCtrl.selected = $stateParams.select;
-                    var paragraphElement = angular.element(document.getElementById($stateParams.select));
-                    $document.scrollToElement(paragraphElement, 0, 1000);
                 }
-                $anchorScroll();
             });
         }
 
-        BookReaderCtrl.absIndex = function($index) {
-            return $index + (BookReaderCtrl.pagination.current-1)*25;
+        BookReaderCtrl.absIndex = function(section, $index) {
+            return $index + section.start;
         };
 
         BookReaderCtrl.nextPage = function() {
@@ -80,8 +79,13 @@ angular.module('holybook').controller('BookReader',
             $location.search('page', --BookReaderCtrl.pagination.current);
         };
 
-        BookReaderCtrl.isSelected = function($index) {
-            return (BookReaderCtrl.selected == BookReaderCtrl.absIndex($index)) ? 'book-paragraph-selected' : ''
+        BookReaderCtrl.isSelected = function(section, $index) {
+            console.log(BookReaderCtrl.absIndex(section, $index));
+            return (BookReaderCtrl.selected == BookReaderCtrl.absIndex(section, $index));
+        };
+
+        BookReaderCtrl.selectedClass = function(section, $index) {
+            return BookReaderCtrl.isSelected(section, $index) ? 'book-paragraph-selected' : '';
         };
 
         return $scope.BookReaderCtrl = BookReaderCtrl;
