@@ -19,10 +19,9 @@ angular.module('holybook').factory('utils', function ($location) {
 
             $scope.$watch(
                 function () {
-                    return $location.search();
+                    return $location.search()[queryField];
                 },
-                function() {
-                    var newValue = $location.search()[queryField];
+                function(newValue) {
                     set($scope, path, newValue);
                     onChange(newValue);
                 }

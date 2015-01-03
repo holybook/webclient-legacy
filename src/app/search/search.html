@@ -1,11 +1,9 @@
-{{ SearchCtrl.page }}
-
 <form role="search">
     <div class="row">
         <div class="input-group col-xs-12 col-md-offset-2 col-md-8">
             <input type="text" class="form-control" ng-model="SearchCtrl.query">
             <span class="input-group-btn" style="max-width: 200px;">
-                <button type="submit" class="btn" ui-sref="search({ 'q' : query, 'page' : 1 })">Search</button>
+                <button type="submit" class="btn" ng-click="SearchCtrl.search()">Search</button>
             </span>
         </div>
     </div>
@@ -19,7 +17,9 @@
 </div>
 <div class="row">
     <div class="col-xs-12 col-md-offset-2" ng-if="SearchCtrl.hasResult">
-        <pagination total-items="SearchCtrl.result.hits" items-per-page="SearchCtrl.searchResultsPerPage" ng-model="SearchCtrl.page" max-size="5" class="pagination-sm" boundary-links="true"></pagination>
+        <pagination total-items="SearchCtrl.result.hits" items-per-page="SearchCtrl.searchResultsPerPage" ng-model="SearchCtrl.page" max-size="5" class="pagination-sm" boundary-links="true"
+                    previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+        </pagination>
     </div>
 </div>
 

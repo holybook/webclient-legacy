@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('holybook', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.bootstrap', 'ui.router', 'angular-loading-bar', 'duScroll', 'errors'])
-    .config(function ($httpProvider, $locationProvider, $stateProvider, $urlRouterProvider, cfpLoadingBarProvider) {
+    .config(function ($httpProvider, $locationProvider, $stateProvider, $urlRouterProvider, pagerConfig, cfpLoadingBarProvider) {
 
         $urlRouterProvider.otherwise('/search');
 
@@ -34,6 +34,14 @@ angular.module('holybook', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
             });
 
         cfpLoadingBarProvider.includeSpinner = false;
+
+        pagerConfig.previousText = "&lsaquo;";
+        //{
+        //    'previous-text' : "&lsaquo;",
+        //    'next-text' : "&rsaquo;",
+        //    'first-text' : "&laquo;",
+        //    'last-text' :"&raquo;"
+        //};
 
     }
 );

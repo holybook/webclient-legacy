@@ -9,7 +9,7 @@ angular.module('holybook').factory('searchConfig', function () {
 });
 
 angular.module('holybook').controller('Search',
-    function ($scope, $state, $urlRouter, $stateParams, api, utils, searchConfig) {
+    function ($scope, $state, $urlRouter, $stateParams, $location, api, utils, searchConfig) {
 
         var SearchCtrl = this;
 
@@ -31,19 +31,20 @@ angular.module('holybook').controller('Search',
             search();
         }
 
-        SearchCtrl.pageChanged = function() {
-            //$state.go("search", {
-            //    q : SearchCtrl.query,
-            //    page : SearchCtrl.page
-            //});
+        SearchCtrl.search = function() {
+            $location.search('q', SearchCtrl.query);
+            SearchCtrl.page = 1;
+            search();
         };
 
         SearchCtrl.pageFromIndex = function(index) {
             return Math.floor(index / 25) + 1; // todo link pagination configuration from reader
         };
 
-        utils.connect($scope, 'SearchCtrl.page', 'page', function() {
-            search();
+        utils.connect($scope, 'SearchCtrl.page', 'page', function(page) {
+            if (page) {
+                search();
+            }
         });
 
         return $scope.SearchCtrl = SearchCtrl;
