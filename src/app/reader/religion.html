@@ -7,13 +7,20 @@
         <img class="religion-picture" ng-src="{{ ReligionCtrl.religion.picture }}" />
     </div>
 </div>
+
 <div class="row browse-authors">
     <accordion close-others="oneAtATime">
         <accordion-group heading="Authors" is-open="ReligionCtrl.authorsVisible">
-            <div class="col-xs-2 browser-entry" ng-repeat="a in ReligionCtrl.authors" ui-sref="browse.author({ 'id' : r._id })">
+            <div class="col-xs-2 browser-entry" ng-repeat="a in ReligionCtrl.authors" ui-sref="browse.author({ 'id' : a._id })">
                 <img class="browser-image author-image" ng-src="{{ a.thumbnail || '/assets/images/author/Default.png' }}" /><br/>
                 <div class="browser-text">{{ a.title || a.name }}</div>
             </div>
         </accordion-group>
     </accordion>
+</div>
+
+<div class="row">
+    <div class="col-xs-2 browser-entry book-entry" ng-repeat="b in ReligionCtrl.books" ui-sref="browse.book({ 'id' : b._id })">
+        <div class="browser-text">{{ b.title }}</div>
+    </div>
 </div>
