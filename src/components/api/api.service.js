@@ -12,6 +12,10 @@ angular.module('holybook').factory('api', function ($http, $resource) {
 
         book : $resource(path('/:language/book/:id')),
 
+        author : $resource(path('/:language/author/:id')),
+
+        religion : $resource(path('/:language/religion/:id')),
+
         text : function(args) {
             return $http.get(path("/" + args.language +"/book/" + args.id + "/text"), {
                 params : {

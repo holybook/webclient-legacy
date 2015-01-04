@@ -109,6 +109,31 @@ body div#body {
 }
 
 /*
+ Book browsing
+*/
+
+.browser-image {
+    width: 96px;
+    height: 96px;
+    margin-bottom: 10px;
+}
+
+.browser-entry {
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.browser-entry:hover {
+    background-color: #f0f9ff;
+}
+
+.browser-text {
+    font-size: 120%;
+}
+
+/*
  Book formatting
 */
 

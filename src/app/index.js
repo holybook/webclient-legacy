@@ -15,16 +15,21 @@ angular.module('holybook', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
             })
             .state('book', {
                 abstract: true,
-                url: '/book',
+                url: '/browse',
                 templateUrl: 'app/reader/reader.html'
             })
-            .state('book.browser', {
+            .state('book.browser.root', {
                 url: '/',
                 templateUrl: 'app/reader/book.browser.html',
                 controller: 'BookBrowser'
             })
+            .state('book.browser.religion', {
+                url: '/religion/:id',
+                templateUrl: 'app/reader/book.browser.religion.html',
+                controller: 'BrowseReligion'
+            })
             .state('book.reader', {
-                url: '/:id?page&select',
+                url: '/book/:id?page&select',
                 templateUrl: 'app/reader/book.reader.html',
                 controller: 'BookReader'
             })
