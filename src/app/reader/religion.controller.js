@@ -19,6 +19,8 @@ angular.module('holybook').controller('Religion',
             ReligionCtrl.authors = authors;
         });
 
+        ReligionCtrl.authorsVisible = true;
+
         return $scope.ReligionCtrl = ReligionCtrl;
 
     }
