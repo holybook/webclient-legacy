@@ -12,6 +12,13 @@ angular.module('holybook').controller('Religion',
             ReligionCtrl.religion = religion;
         });
 
+        api.author.query({
+            language: "en",
+            religion: $stateParams.id
+        }, function (authors) {
+            ReligionCtrl.authors = authors;
+        });
+
         return $scope.ReligionCtrl = ReligionCtrl;
 
     }

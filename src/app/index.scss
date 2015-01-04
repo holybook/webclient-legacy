@@ -1,3 +1,14 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+}
+
 $highlight: #ebf5ff;
 
 .search-result {
@@ -116,6 +127,12 @@ body div#body {
     width: 96px;
     height: 96px;
     margin-bottom: 10px;
+    object-fit: contain;
+}
+
+.author-image {
+    border-radius: 48px;
+    object-fit: cover;
 }
 
 .browser-entry {
@@ -123,6 +140,7 @@ body div#body {
     font-family: 'Open Sans', sans-serif;
     padding: 20px;
     border-radius: 20px;
+    cursor: pointer;
 }
 
 .browser-entry:hover {
@@ -130,7 +148,12 @@ body div#body {
 }
 
 .browser-text {
-    font-size: 120%;
+    font-size: 100%;
+    height: 2em;
+}
+
+.religion-picture {
+    width: 256px;
 }
 
 /*

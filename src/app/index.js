@@ -13,25 +13,25 @@ angular.module('holybook', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
                 controller: 'Search',
                 reloadOnSearch: false
             })
-            .state('book', {
+            .state('browse', {
                 abstract: true,
                 url: '/browse',
-                templateUrl: 'app/reader/reader.html'
+                templateUrl: 'app/reader/browser.html'
             })
-            .state('book.browser.root', {
+            .state('browse.root', {
                 url: '/',
-                templateUrl: 'app/reader/book.browser.html',
-                controller: 'BookBrowser'
+                templateUrl: 'app/reader/browse.html',
+                controller: 'BrowseRoot'
             })
-            .state('book.browser.religion', {
+            .state('browse.religion', {
                 url: '/religion/:id',
-                templateUrl: 'app/reader/book.browser.religion.html',
-                controller: 'BrowseReligion'
+                templateUrl: 'app/reader/religion.html',
+                controller: 'Religion'
             })
-            .state('book.reader', {
+            .state('browse.book', {
                 url: '/book/:id?page&select',
-                templateUrl: 'app/reader/book.reader.html',
-                controller: 'BookReader'
+                templateUrl: 'app/reader/book.html',
+                controller: 'Book'
             })
             .state('roadmap', {
                 url: '/roadmap',

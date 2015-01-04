@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('holybook').controller('BookBrowser',
+angular.module('holybook').controller('BrowseRoot',
     function ($scope, api) {
 
         var BrowserCtrl = this;

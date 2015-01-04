@@ -1,13 +1,13 @@
 'use strict';
 
-angular.module('holybook').controller('BookReader',
+angular.module('holybook').controller('Book',
     function ($scope, $stateParams, $location, $anchorScroll, $document, api, utils) {
 
-        var BookReaderCtrl = this;
+        var BookCtrl = this;
 
         var paragraphsPerPage = 25;
 
-        utils.connect($scope, 'BookReaderCtrl.pagination.current', 'page', function(page) {
+        utils.connect($scope, 'BookCtrl.pagination.current', 'page', function(page) {
             getParagraphs(page);
         }, parseInt);
 
@@ -23,14 +23,14 @@ angular.module('holybook').controller('BookReader',
             }
             book.sections[book.sections.length - 1].end = book.paragraphs;
 
-            BookReaderCtrl.book = book;
-            BookReaderCtrl.pagination.total = Math.ceil(book.paragraphs / paragraphsPerPage);
+            BookCtrl.book = book;
+            BookCtrl.pagination.total = Math.ceil(book.paragraphs / paragraphsPerPage);
         });
 
         function insertText(text) {
-            var startIndex = (BookReaderCtrl.pagination.current - 1)*paragraphsPerPage;
+            var startIndex = (BookCtrl.pagination.current - 1)*paragraphsPerPage;
             var endIndex = startIndex + paragraphsPerPage;
-            BookReaderCtrl.visibleSections = Lazy(BookReaderCtrl.book.sections).reduce(function(agg, section) {
+            BookCtrl.visibleSections = Lazy(BookCtrl.book.sections).reduce(function(agg, section) {
                 if (section.start <= startIndex && section.end > startIndex) {
                     agg.push({
                         'start' : section.start,
@@ -57,44 +57,44 @@ angular.module('holybook').controller('BookReader',
                 from: (page - 1)*paragraphsPerPage,
                 size: paragraphsPerPage
             }).success(function (text) {
-                BookReaderCtrl.hasResult = true;
+                BookCtrl.hasResult = true;
 
                 insertText(text);
 
                 if (typeof($stateParams.select) !== 'undefined') {
-                    BookReaderCtrl.selected = $stateParams.select;
+                    BookCtrl.selected = $stateParams.select;
                 }
             });
         }
 
-        BookReaderCtrl.absIndex = function(section, $index) {
+        BookCtrl.absIndex = function(section, $index) {
             return $index + section.start;
         };
 
-        BookReaderCtrl.nextPage = function() {
+        BookCtrl.nextPage = function() {
             $location.search({
-                'page' : ++BookReaderCtrl.pagination.current,
+                'page' : ++BookCtrl.pagination.current,
                 'select' : undefined
             });
         };
 
-        BookReaderCtrl.prevPage = function() {
+        BookCtrl.prevPage = function() {
             $location.search({
-                'page' : --BookReaderCtrl.pagination.current,
+                'page' : --BookCtrl.pagination.current,
                 'select' : undefined
             });
         };
 
-        BookReaderCtrl.isSelected = function(section, $index) {
-            console.log(BookReaderCtrl.absIndex(section, $index));
-            return (BookReaderCtrl.selected == BookReaderCtrl.absIndex(section, $index));
+        BookCtrl.isSelected = function(section, $index) {
+            console.log(BookCtrl.absIndex(section, $index));
+            return (BookCtrl.selected == BookCtrl.absIndex(section, $index));
         };
 
-        BookReaderCtrl.selectedClass = function(section, $index) {
-            return BookReaderCtrl.isSelected(section, $index) ? 'book-paragraph-selected' : '';
+        BookCtrl.selectedClass = function(section, $index) {
+            return BookCtrl.isSelected(section, $index) ? 'book-paragraph-selected' : '';
         };
 
-        return $scope.BookReaderCtrl = BookReaderCtrl;
+        return $scope.BookReaderCtrl = BookCtrl;
 
     }
 );
