@@ -29,7 +29,7 @@
         <div id="content">
             <a ng-repeat="s in SearchCtrl.result.results"
                class="search-result"
-               ui-sref="book.reader({ 'id' : s.book.id, 'page' : SearchCtrl.pageFromIndex(s.index), 'select' : s.index })"
+               ui-sref="browse.book({ 'id' : s.book.id, 'page' : SearchCtrl.pageFromIndex(s.index), 'select' : s.index })"
                ui-sref-opts="">
                 <div>
                     <div ng-bind-html="s.body"></div>
