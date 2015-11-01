@@ -23,7 +23,7 @@
     <div class="col-xs-12">
         <table class="book-table table table-hover">
             <tbody>
-                <tr ng-repeat="b in ReligionCtrl.books" ui-sref="browse.book({ 'id' : b.id })">
+                <tr ng-repeat="b in ReligionCtrl.books" ui-sref="browse.book({ 'id' : b.id, 'page': 1 })">
                     <td>{{ b.title }}</td>
                 </tr>
             </tbody>
