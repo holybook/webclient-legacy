@@ -36,6 +36,17 @@ angular.module('holybook').controller('Religion',
         ReligionCtrl.page = 1;
         ReligionCtrl.authorsVisible = true;
 
+        api.wiki().then(function(response) {
+            console.log(response);
+            ReligionCtrl.religion.title = response.title;
+            ReligionCtrl.religion.extract = response.extract;
+
+            api.wikiImg(response.images[0].title).then(function (response) {
+               console.log(response);
+                ReligionCtrl.religion.picture = response;
+            });
+        });
+
         return $scope.ReligionCtrl = ReligionCtrl;
 
     }

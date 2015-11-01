@@ -37,6 +37,48 @@ angular.module('holybook').factory('api', function ($http, $resource) {
 
         total : function(headers) {
             return headers('pagination-total');
+        },
+
+        wiki: function() {
+            return $http.jsonp('http://en.wikipedia.org/w/api.php', {
+                params: {
+                    action: 'query',
+                    format: 'json',
+                    prop: 'extracts|images',
+                    imlimit: '1',
+                    exchars: '500',
+                    exintro: '',
+                    explaintext: '',
+                    pageids: 4251,
+                    callback: 'JSON_CALLBACK'
+                }
+            }).then(function (res) {
+                return res.data.query.pages['4251'];
+            });
+
+            //https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&pageids=4251
+
+        },
+
+        wikiImg: function(title) {
+
+            return $http.jsonp('http://en.wikipedia.org/w/api.php', {
+                params: {
+                    action: 'query',
+                    format: 'json',
+                    prop: 'imageinfo',
+                    iiprop: 'url',
+                    iiurlwidth: 500,
+                    imlimit: '1',
+                    titles: title,
+                    callback: 'JSON_CALLBACK'
+                }
+            }).then(function (res) {
+                return res.data.query.pages['-1'].imageinfo[0].thumburl;
+            });
+
+
+            //w/api.php?action=query&prop=imageinfo&format=json&iiprop=url&titles=File%3A051907%20Wilmette%20IMG%201404%20The%20Greatest%20Name.jpg
         }
 
     };
