@@ -1,14 +1,14 @@
-<div class="row">
-    <div class="col-xs-12 col-md-8">
+<div class="row description">
+    <div class="col-xs-12 col-sm-6 col-md-8">
         <h1>{{ReligionCtrl.religion.name}}</h1>
         <p>The Bahá'í Faith is the youngest of the world's independent religions. Its founder, Bahá'u'lláh (1817-1892), is regarded by Bahá'ís as the most recent in the line of Messengers of God that stretches back beyond recorded time and that includes Abraham, Moses, Buddha, Krishna, Zoroaster, Christ and Muhammad.</p>
     </div>
-    <div class="col-xs-12 col-md-4">
+    <div class="hidden-xs col-sm-6 col-md-4">
         <img class="religion-picture" ng-src="{{ ReligionCtrl.religion.picture }}" />
     </div>
 </div>
 
-<div class="row browse-authors">
+<div class="row">
     <accordion close-others="oneAtATime">
         <accordion-group heading="Authors" is-open="ReligionCtrl.authorsVisible">
             <div class="col-xs-2 browser-entry" ng-repeat="a in ReligionCtrl.authors" ui-sref="browse.author({ 'id' : a.id })">
