@@ -28,6 +28,11 @@ angular.module('holybook', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
                 templateUrl: 'app/reader/religion.html',
                 controller: 'Religion'
             })
+            .state('browse.author', {
+                url: '/author/:id',
+                templateUrl: 'app/reader/author.html',
+                controller: 'Author'
+            })
             .state('browse.book', {
                 url: '/book/:id?page&select',
                 templateUrl: 'app/reader/book.html',

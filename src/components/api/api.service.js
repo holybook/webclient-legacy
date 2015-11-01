@@ -2,7 +2,7 @@
 
 angular.module('holybook').factory('api', function ($http, $resource) {
 
-    var basePath = 'http://localhost:9200/_public'; // Todo: Generalize
+    var basePath = 'http://localhost:3030'; // Todo: Generalize
 
     function path(suffix) {
         return basePath + suffix;
@@ -10,14 +10,14 @@ angular.module('holybook').factory('api', function ($http, $resource) {
 
     return {
 
-        book : $resource(path('/:language/book/:id')),
+        book : $resource(path('/book/:id')),
 
-        author : $resource(path('/:language/author/:id')),
+        author : $resource(path('/author/:id')),
 
-        religion : $resource(path('/:language/religion/:id')),
+        religion : $resource(path('/religion/:id')),
 
         text : function(args) {
-            return $http.get(path("/" + args.language +"/book/" + args.id + "/text"), {
+            return $http.get(path("/book/" + args.id + "/text"), {
                 params : {
                     from : args.from,
                     size : args.size
@@ -31,9 +31,12 @@ angular.module('holybook').factory('api', function ($http, $resource) {
                     q : query,
                     from : (page - 1)*searchResultsPerPage,
                     size : searchResultsPerPage
-
                 }
             });
+        },
+
+        total : function(headers) {
+            return headers('pagination-total');
         }
 
     };

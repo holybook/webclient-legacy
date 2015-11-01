@@ -11,7 +11,7 @@
 <div class="row browse-authors">
     <accordion close-others="oneAtATime">
         <accordion-group heading="Authors" is-open="ReligionCtrl.authorsVisible">
-            <div class="col-xs-2 browser-entry" ng-repeat="a in ReligionCtrl.authors" ui-sref="browse.author({ 'id' : a._id })">
+            <div class="col-xs-2 browser-entry" ng-repeat="a in ReligionCtrl.authors" ui-sref="browse.author({ 'id' : a.id })">
                 <img class="browser-image author-image" ng-src="{{ a.thumbnail || '/assets/images/author/Default.png' }}" /><br/>
                 <div class="browser-text">{{ a.title || a.name }}</div>
             </div>
@@ -20,7 +20,19 @@
 </div>
 
 <div class="row">
-    <div class="col-xs-2 browser-entry book-entry" ng-repeat="b in ReligionCtrl.books" ui-sref="browse.book({ 'id' : b._id })">
-        <div class="browser-text">{{ b.title }}</div>
+    <div class="col-xs-12">
+        <table class="book-table table table-hover">
+            <tbody>
+                <tr ng-repeat="b in ReligionCtrl.books" ui-sref="browse.book({ 'id' : b.id })">
+                    <td>{{ b.title }}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+</div>
+
+<div class="row">
+    <pagination total-items="ReligionCtrl.booksTotal" items-per-page="25" ng-model="ReligionCtrl.page" max-size="5" class="pagination-sm" boundary-links="true"
+                previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+    </pagination>
 </div>

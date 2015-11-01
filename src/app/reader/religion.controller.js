@@ -5,6 +5,20 @@ angular.module('holybook').controller('Religion',
 
         var ReligionCtrl = this;
 
+        $scope.$watch('ReligionCtrl.page', function(page) {
+            if (page !== undefined) {
+                api.book.query({
+                    language: "en",
+                    religion: $stateParams.id,
+                    from: (page - 1) * 25,
+                    size: 25
+                }, function (books, headers) {
+                    ReligionCtrl.books = books;
+                    ReligionCtrl.booksTotal = api.total(headers);
+                });
+            }
+        });
+
         api.religion.get({
             language: "en",
             id: $stateParams.id
@@ -19,13 +33,7 @@ angular.module('holybook').controller('Religion',
             ReligionCtrl.authors = authors;
         });
 
-        api.book.query({
-            language: "en",
-            religion: $stateParams.id
-        }, function (books) {
-            ReligionCtrl.books = books;
-        });
-
+        ReligionCtrl.page = 1;
         ReligionCtrl.authorsVisible = true;
 
         return $scope.ReligionCtrl = ReligionCtrl;
