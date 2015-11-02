@@ -58,11 +58,11 @@ angular.module('holybook').factory('api', function ($http, $resource) {
                 return res.data.query.pages[obj.wikipedia_id];
             }).then(function (res) {
                 console.log(res);
-                obj.title = res.title;
+                obj.title = obj.title || res.title;
                 obj.extract = res.extract;
                 obj.wikipedia = res.fullurl;
                 if (res.thumbnail) {
-                    obj.picture = res.thumbnail.source;
+                    obj.picture = obj.picture || res.thumbnail.source;
                 }
 
                 return obj;
