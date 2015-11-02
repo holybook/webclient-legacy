@@ -19,6 +19,12 @@
     </accordion>
 </div>
 
+<div class="row pagination-centered">
+    <pagination total-items="ReligionCtrl.booksTotal" items-per-page="25" ng-model="ReligionCtrl.page" max-size="5" class="pagination-sm" boundary-links="true"
+                previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+    </pagination>
+</div>
+
 <div class="row">
     <div class="col-xs-12">
         <table class="book-table table table-hover">
@@ -29,10 +35,4 @@
             </tbody>
         </table>
     </div>
-</div>
-
-<div class="row">
-    <pagination total-items="ReligionCtrl.booksTotal" items-per-page="25" ng-model="ReligionCtrl.page" max-size="5" class="pagination-sm" boundary-links="true"
-                previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
-    </pagination>
 </div>
