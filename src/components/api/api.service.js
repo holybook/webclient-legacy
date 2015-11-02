@@ -39,33 +39,40 @@ angular.module('holybook').factory('api', function ($http, $resource) {
             return headers('pagination-total');
         },
 
-        wiki: function(obj) {
+        wiki: function(objs, thumbsize) {
+            if (!_.isArray(objs)) {
+                objs = [ objs ];
+            }
+            var pageids = _.map(objs, function(o) { return o.wikipedia_id }).join('|');
             return $http.jsonp('http://en.wikipedia.org/w/api.php', {
                 params: {
                     action: 'query',
                     format: 'json',
                     prop: 'extracts|pageimages|info',
                     piprop: 'thumbnail|name|original',
-                    pithumbsize: 500,
+                    pithumbsize: thumbsize || 500,
                     inprop: 'url',
                     exchars: '500',
                     exintro: '',
                     explaintext: '',
-                    pageids: obj.wikipedia_id,
+                    pageids: pageids,
                     callback: 'JSON_CALLBACK'
                 }
             }).then(function (res) {
-                return res.data.query.pages[obj.wikipedia_id];
+                return res.data.query.pages;
             }).then(function (res) {
                 console.log(res);
-                obj.title = obj.title || res.title;
-                obj.extract = res.extract;
-                obj.wikipedia = res.fullurl;
-                if (res.thumbnail) {
-                    obj.picture = obj.picture || res.thumbnail.source;
-                }
-
-                return obj;
+                console.log(objs);
+                return _.map(objs, function (o) {
+                    var r = res[o.wikipedia_id];
+                    o.title = o.title || r.title;
+                    o.extract = r.extract;
+                    o.wikipedia = r.fullurl;
+                    if (r.thumbnail) {
+                        o.picture = o.picture || r.thumbnail.source;
+                    }
+                    return o;
+                });
             });
 
         }
