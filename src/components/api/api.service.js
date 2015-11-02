@@ -43,7 +43,7 @@ angular.module('holybook').factory('api', function ($http, $resource) {
             if (!_.isArray(objs)) {
                 objs = [ objs ];
             }
-            var pageids = _.map(objs, function(o) { return o.wikipedia_id }).join('|');
+            var pageids = _.compact(_.map(objs, function(o) { return o.wikipedia_id })).join('|');
             return $http.jsonp('http://en.wikipedia.org/w/api.php', {
                 params: {
                     action: 'query',
@@ -51,6 +51,7 @@ angular.module('holybook').factory('api', function ($http, $resource) {
                     prop: 'extracts|pageimages|info',
                     piprop: 'thumbnail|name|original',
                     pithumbsize: thumbsize || 500,
+                    pilimit: 100,
                     inprop: 'url',
                     exchars: '500',
                     exintro: '',
@@ -65,11 +66,13 @@ angular.module('holybook').factory('api', function ($http, $resource) {
                 console.log(objs);
                 return _.map(objs, function (o) {
                     var r = res[o.wikipedia_id];
-                    o.title = o.title || r.title;
-                    o.extract = r.extract;
-                    o.wikipedia = r.fullurl;
-                    if (r.thumbnail) {
-                        o.picture = o.picture || r.thumbnail.source;
+                    if (r) {
+                        o.title = o.title || r.title;
+                        o.extract = r.extract;
+                        o.wikipedia = r.fullurl;
+                        if (r.thumbnail) {
+                            o.picture = o.picture || r.thumbnail.source;
+                        }
                     }
                     return o;
                 });

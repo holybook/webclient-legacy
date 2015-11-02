@@ -32,6 +32,7 @@ angular.module('holybook').controller('Religion',
             religion: $stateParams.id
         }, function (authors) {
             ReligionCtrl.authors = authors;
+            return api.wiki(ReligionCtrl.authors, 200);
         });
 
         ReligionCtrl.page = 1;
