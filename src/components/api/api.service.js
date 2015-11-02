@@ -44,8 +44,9 @@ angular.module('holybook').factory('api', function ($http, $resource) {
                 params: {
                     action: 'query',
                     format: 'json',
-                    prop: 'extracts|images',
+                    prop: 'extracts|images|info',
                     imlimit: '1',
+                    inprop: 'url',
                     exchars: '500',
                     exintro: '',
                     explaintext: '',

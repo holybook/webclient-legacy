@@ -40,6 +40,7 @@ angular.module('holybook').controller('Religion',
             console.log(response);
             ReligionCtrl.religion.title = response.title;
             ReligionCtrl.religion.extract = response.extract;
+            ReligionCtrl.religion.wikipedia = response.fullurl;
 
             api.wikiImg(response.images[0].title).then(function (response) {
                console.log(response);
