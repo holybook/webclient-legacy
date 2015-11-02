@@ -4,7 +4,7 @@
         <p>{{AuthorCtrl.author.extract}} <a href="{{ AuthorCtrl.author.wikipedia }}" target="_blank">[more]</a></p>
     </div>
     <div class="col-xs-12 col-md-4">
-        <img class="religion-picture" ng-src="{{ AuthorCtrl.author.picture }}" />
+        <img class="religion-picture" ng-src="{{ AuthorCtrl.author.picture || '/assets/images/author/Default.png' }}" />
     </div>
 </div>
 
