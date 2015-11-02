@@ -24,6 +24,7 @@ angular.module('holybook').controller('Author',
             id: $stateParams.id
         }, function (author) {
             AuthorCtrl.author = author;
+            return api.wiki(AuthorCtrl.author);
         });
 
         AuthorCtrl.page = 1;
