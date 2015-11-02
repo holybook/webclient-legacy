@@ -39,7 +39,7 @@ angular.module('holybook').factory('api', function ($http, $resource) {
             return headers('pagination-total');
         },
 
-        wiki: function() {
+        wiki: function(id) {
             return $http.jsonp('http://en.wikipedia.org/w/api.php', {
                 params: {
                     action: 'query',
@@ -50,11 +50,11 @@ angular.module('holybook').factory('api', function ($http, $resource) {
                     exchars: '500',
                     exintro: '',
                     explaintext: '',
-                    pageids: 4251,
+                    pageids: id,
                     callback: 'JSON_CALLBACK'
                 }
             }).then(function (res) {
-                return res.data.query.pages['4251'];
+                return res.data.query.pages[id];
             });
 
             //https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&pageids=4251
