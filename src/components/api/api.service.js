@@ -50,7 +50,7 @@ angular.module('holybook').factory('api', function ($http, $resource) {
                     format: 'json',
                     prop: 'extracts|pageimages|info',
                     piprop: 'thumbnail|name|original',
-                    pithumbsize: thumbsize || 500,
+                    pithumbsize: thumbsize || 256,
                     pilimit: 100,
                     inprop: 'url',
                     exchars: '500',
