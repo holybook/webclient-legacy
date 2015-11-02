@@ -61,7 +61,9 @@ angular.module('holybook').factory('api', function ($http, $resource) {
                 obj.title = res.title;
                 obj.extract = res.extract;
                 obj.wikipedia = res.fullurl;
-                obj.picture = res.thumbnail.source;
+                if (res.thumbnail) {
+                    obj.picture = res.thumbnail.source;
+                }
 
                 return obj;
             });
