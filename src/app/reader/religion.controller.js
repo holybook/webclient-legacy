@@ -24,17 +24,7 @@ angular.module('holybook').controller('Religion',
             id: $stateParams.id
         }, function (religion) {
             ReligionCtrl.religion = religion;
-            api.wiki(ReligionCtrl.religion.wikipedia_id).then(function(response) {
-                console.log(response);
-                ReligionCtrl.religion.title = response.title;
-                ReligionCtrl.religion.extract = response.extract;
-                ReligionCtrl.religion.wikipedia = response.fullurl;
-
-                api.wikiImg(response.images[0].title).then(function (response) {
-                    console.log(response);
-                    ReligionCtrl.religion.picture = response;
-                });
-            });
+            return api.wiki(ReligionCtrl.religion);
         });
 
         api.author.query({

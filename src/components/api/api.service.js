@@ -8,7 +8,7 @@ angular.module('holybook').factory('api', function ($http, $resource) {
         return basePath + suffix;
     }
 
-    return {
+    var service = {
 
         book : $resource(path('/book/:id')),
 
@@ -39,49 +39,37 @@ angular.module('holybook').factory('api', function ($http, $resource) {
             return headers('pagination-total');
         },
 
-        wiki: function(id) {
+        wiki: function(obj) {
             return $http.jsonp('http://en.wikipedia.org/w/api.php', {
                 params: {
                     action: 'query',
                     format: 'json',
-                    prop: 'extracts|images|info',
-                    imlimit: '1',
+                    prop: 'extracts|pageimages|info',
+                    piprop: 'thumbnail|name|original',
+                    pithumbsize: 500,
                     inprop: 'url',
                     exchars: '500',
                     exintro: '',
                     explaintext: '',
-                    pageids: id,
+                    pageids: obj.wikipedia_id,
                     callback: 'JSON_CALLBACK'
                 }
             }).then(function (res) {
-                return res.data.query.pages[id];
-            });
-
-            //https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&pageids=4251
-
-        },
-
-        wikiImg: function(title) {
-
-            return $http.jsonp('http://en.wikipedia.org/w/api.php', {
-                params: {
-                    action: 'query',
-                    format: 'json',
-                    prop: 'imageinfo',
-                    iiprop: 'url',
-                    iiurlwidth: 500,
-                    imlimit: '1',
-                    titles: title,
-                    callback: 'JSON_CALLBACK'
-                }
+                return res.data.query.pages[obj.wikipedia_id];
             }).then(function (res) {
-                return res.data.query.pages['-1'].imageinfo[0].thumburl;
+                console.log(res);
+                obj.title = res.title;
+                obj.extract = res.extract;
+                obj.wikipedia = res.fullurl;
+                obj.picture = res.thumbnail.source;
+
+                return obj;
             });
 
-
-            //w/api.php?action=query&prop=imageinfo&format=json&iiprop=url&titles=File%3A051907%20Wilmette%20IMG%201404%20The%20Greatest%20Name.jpg
         }
 
     };
+
+    return service;
 
 });
