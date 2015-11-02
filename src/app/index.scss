@@ -120,14 +120,13 @@ body div#body {
 .browser-image {
     width: 96px;
     height: 96px;
+    background-size: contain;
     margin-bottom: 10px;
-    object-fit: contain;
 }
 
 .author-image {
     border-radius: 48px;
-    object-fit: cover;
-    object-position: 0 0;
+    background-size: cover;
 }
 
 .browser-entry {
