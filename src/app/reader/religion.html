@@ -1,0 +1,38 @@
+<div class="row description">
+    <div class="col-xs-12 col-sm-6 col-md-8">
+        <h1>{{ReligionCtrl.religion.title}}</h1>
+        <p>{{ReligionCtrl.religion.extract}} <a href="{{ ReligionCtrl.religion.wikipedia }}" target="_blank">[more]</a></p>
+    </div>
+    <div class="hidden-xs col-sm-6 col-md-4">
+        <img class="religion-picture" ng-src="{{ ReligionCtrl.religion.picture }}" />
+    </div>
+</div>
+
+<div class="row">
+    <accordion close-others="oneAtATime">
+        <accordion-group heading="Authors" is-open="ReligionCtrl.authorsVisible">
+            <div class="col-md-2 col-sm-3 col-xs-4 browser-entry" ng-repeat="a in ReligionCtrl.authors" ui-sref="browse.author({ 'id' : a.id })">
+                <div class="browser-image author-image" hb-src="{{ a.picture || '/assets/images/author/Default.png' }}"></div><br/>
+                <div class="browser-text">{{ a.title || a.name }}</div>
+            </div>
+        </accordion-group>
+    </accordion>
+</div>
+
+<div class="row pagination-centered">
+    <pagination total-items="ReligionCtrl.booksTotal" items-per-page="25" ng-model="ReligionCtrl.page" max-size="5" class="pagination-sm" boundary-links="true"
+                previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+    </pagination>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="book-table table table-hover">
+            <tbody>
+                <tr ng-repeat="b in ReligionCtrl.books" ui-sref="browse.book({ 'id' : b.id, 'page': 1 })">
+                    <td>{{ b.title }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

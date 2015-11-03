@@ -1,0 +1,31 @@
+<div class="row description">
+    <div class="col-xs-12 col-md-8">
+        <h1>{{AuthorCtrl.author.title || AuthorCtrl.author.name}}</h1>
+
+        <p>{{AuthorCtrl.author.extract}} <a href="{{ AuthorCtrl.author.wikipedia }}" target="_blank"
+                                            ng-show="AuthorCtrl.author.extract">[more]</a></p>
+    </div>
+    <div class="col-xs-12 col-md-4">
+        <img class="religion-picture" ng-src="{{ AuthorCtrl.author.picture || '/assets/images/author/Default.png' }}"/>
+    </div>
+</div>
+
+<div class="row pagination-centered">
+    <pagination total-items="AuthorCtrl.booksTotal" items-per-page="25" ng-model="AuthorCtrl.page" max-size="5"
+                class="pagination-sm" boundary-links="true"
+                previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+    </pagination>
+</div>
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="book-table table table-hover">
+            <tbody>
+            <tr ng-repeat="b in AuthorCtrl.books" ui-sref="browse.book({ 'id' : b.id, 'page' : 1 })">
+                <td>{{ b.title }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

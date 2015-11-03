@@ -1,30 +1,42 @@
 'use strict';
 
-angular.module('holybook', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.bootstrap', 'ui.router', 'angularUtils.directives.dirPagination', 'angular-loading-bar', 'errors'])
-    .config(function ($httpProvider, $stateProvider, $urlRouterProvider, cfpLoadingBarProvider) {
+angular.module('holybook', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.bootstrap', 'ui.router', 'angular-loading-bar', 'errors', 'bb.scrollWhen'])
+    .config(function ($httpProvider, $locationProvider, $stateProvider, $urlRouterProvider, pagerConfig, cfpLoadingBarProvider) {
 
         $urlRouterProvider.otherwise('/search');
 
+        //$locationProvider.html5Mode(true);
         $stateProvider
             .state('search', {
-                url: '/search',
+                url: '/search?q&page',
                 templateUrl: 'app/search/search.html',
-                controller: 'Search'
+                controller: 'Search',
+                reloadOnSearch: false
             })
-            .state('book', {
+            .state('browse', {
                 abstract: true,
-                url: '/book',
-                templateUrl: 'app/reader/reader.html'
+                url: '/browse',
+                templateUrl: 'app/reader/browser.html'
             })
-            .state('book.browser', {
+            .state('browse.root', {
                 url: '/',
-                templateUrl: 'app/reader/book.browser.html',
-                controller: 'BookBrowser'
+                templateUrl: 'app/reader/browse.html',
+                controller: 'BrowseRoot'
             })
-            .state('book.reader', {
-                url: '/:id',
-                templateUrl: 'app/reader/book.reader.html',
-                controller: 'BookReader'
+            .state('browse.religion', {
+                url: '/religion/:id',
+                templateUrl: 'app/reader/religion.html',
+                controller: 'Religion'
+            })
+            .state('browse.author', {
+                url: '/author/:id',
+                templateUrl: 'app/reader/author.html',
+                controller: 'Author'
+            })
+            .state('browse.book', {
+                url: '/book/:id?page&select',
+                templateUrl: 'app/reader/book.html',
+                controller: 'Book'
             })
             .state('roadmap', {
                 url: '/roadmap',
@@ -32,6 +44,14 @@ angular.module('holybook', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
             });
 
         cfpLoadingBarProvider.includeSpinner = false;
+
+        pagerConfig.previousText = "&lsaquo;";
+        //{
+        //    'previous-text' : "&lsaquo;",
+        //    'next-text' : "&rsaquo;",
+        //    'first-text' : "&laquo;",
+        //    'last-text' :"&raquo;"
+        //};
 
     }
 );

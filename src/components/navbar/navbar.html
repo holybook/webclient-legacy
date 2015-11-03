@@ -1,23 +1,25 @@
-<nav class="navbar navbar-default" role="navigation" ng-controller="NavigationController">
-    <div class="navbar-inner">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Holybook</a>
-            </div>
-            <div class="collapse navbar-collapse" collapse="isCollapsed">
-                <!-- Menu on mobile -->
-                <ul class="nav navbar-nav">
-                    <li ng-class="menuClass('search')"><a ui-sref="search">Search</a></li>
-                    <li ng-class="menuClass('book')"><a ui-sref="book.browser">Read</a></li>
-                    <li ng-class="menuClass('roadmap')"><a ui-sref="roadmap">Roadmap</a></li>
-                </ul>
+<header>
+    <nav class="navbar navbar-default" role="navigation" ng-controller="NavigationController">
+        <div class="navbar-inner">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Holybook</a>
+                </div>
+                <div class="collapse navbar-collapse" collapse="isCollapsed">
+                    <!-- Menu on mobile -->
+                    <ul class="nav navbar-nav">
+                        <li ng-class="menuClass('search')"><a ui-sref="search">Search</a></li>
+                        <li ng-class="menuClass('browse')"><a ui-sref="browse.root">Read</a></li>
+                        <li ng-class="menuClass('roadmap')"><a ui-sref="roadmap">Roadmap</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-</nav>
+    </nav>
+</header>
