@@ -11,7 +11,7 @@
 <div class="row">
     <accordion close-others="oneAtATime">
         <accordion-group heading="Authors" is-open="ReligionCtrl.authorsVisible">
-            <div class="col-xs-2 browser-entry" ng-repeat="a in ReligionCtrl.authors" ui-sref="browse.author({ 'id' : a.id })">
+            <div class="col-md-2 col-sm-3 col-xs-4 browser-entry" ng-repeat="a in ReligionCtrl.authors" ui-sref="browse.author({ 'id' : a.id })">
                 <div class="browser-image author-image" hb-src="{{ a.picture || '/assets/images/author/Default.png' }}"></div><br/>
                 <div class="browser-text">{{ a.title || a.name }}</div>
             </div>
