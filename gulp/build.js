@@ -79,7 +79,7 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
 });
 
 gulp.task('images', function () {
-  return gulp.src('src/assets/images/**/*')
+  return gulp.src('src/assets/images/**/*', 'src/favicon.ico')
     .pipe($.cache($.imagemin({
       optimizationLevel: 3,
       progressive: true,
