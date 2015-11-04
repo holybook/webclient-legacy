@@ -2,7 +2,7 @@
 
 angular.module('holybook').factory('api', function ($http, $resource) {
 
-    var basePath = 'http://localhost:3030'; // Todo: Generalize
+    var basePath = 'http://localhost:3030/api'; // Todo: Generalize
 
     function path(suffix) {
         return basePath + suffix;
