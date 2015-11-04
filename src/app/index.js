@@ -1,6 +1,18 @@
 'use strict';
-
-angular.module('holybook', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.bootstrap', 'ui.router', 'angular-loading-bar', 'errors', 'bb.scrollWhen'])
+angular.module('holybook', [
+    'ngAnimate',
+    'ngCookies',
+    'ngTouch',
+    'ngSanitize',
+    'ngResource',
+    'ui.bootstrap',
+    'ui.router',
+    'angular-loading-bar',
+    'errors',
+    'bb.scrollWhen',
+    'angulartics',
+    'angulartics.google.analytics'
+])
     .config(function ($httpProvider, $locationProvider, $stateProvider, $urlRouterProvider, pagerConfig, cfpLoadingBarProvider) {
 
         $urlRouterProvider.otherwise('/search');
