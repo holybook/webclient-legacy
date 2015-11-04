@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('holybook').factory('api', function ($http, $resource) {
+angular.module('holybook').factory('api', function ($http, $resource, env) {
 
-    var basePath = 'http://localhost:3030/api'; // Todo: Generalize
+    var basePath = env.api;
 
     function path(suffix) {
         return basePath + suffix;

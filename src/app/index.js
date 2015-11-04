@@ -11,7 +11,9 @@ angular.module('holybook', [
     'errors',
     'bb.scrollWhen',
     'angulartics',
-    'angulartics.google.analytics'
+    'angulartics.google.analytics',
+
+    'holybook.config'
 ])
     .config(function ($httpProvider, $locationProvider, $stateProvider, $urlRouterProvider, pagerConfig, cfpLoadingBarProvider) {
 

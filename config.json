@@ -1,0 +1,12 @@
+{
+    "local": {
+        "env": {
+            "api": "http://localhost:3030/api"
+        }
+    },
+    "production": {
+        "env": {
+            "api": "http://holybook.ws/api"
+        }
+    }
+}
