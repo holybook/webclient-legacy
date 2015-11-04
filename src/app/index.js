@@ -57,7 +57,7 @@ angular.module('holybook', [
 
         cfpLoadingBarProvider.includeSpinner = false;
 
-        pagerConfig.previousText = "&lsaquo;";
+        pagerConfig.previousText = '&lsaquo;';
         //{
         //    'previous-text' : "&lsaquo;",
         //    'next-text' : "&rsaquo;",

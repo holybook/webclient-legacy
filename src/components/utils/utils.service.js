@@ -21,10 +21,10 @@ angular.module('holybook').factory('utils', function ($location) {
             if (typeof(parse) === 'undefined') {
                 parse = function(v) {
                     return v;
-                }
+                };
             }
 
-            var path = field.split(".");
+            var path = field.split('.');
 
             $scope.$watch(
                 function () {

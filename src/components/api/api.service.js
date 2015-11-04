@@ -17,7 +17,7 @@ angular.module('holybook').factory('api', function ($http, $resource) {
             religion: $resource(path('/religion/:id')),
 
             text: function (args) {
-                return $http.get(path("/book/" + args.id + "/text"), {
+                return $http.get(path('/book/' + args.id + '/text'), {
                     params: {
                         from: args.from,
                         size: args.size
@@ -44,7 +44,7 @@ angular.module('holybook').factory('api', function ($http, $resource) {
                     objs = [objs];
                 }
                 var pageids = _.compact(_.map(objs, function (o) {
-                    return o.wikipedia_id
+                    return o.wikipedia_id;
                 }));
                 if (pageids.length > 0) {
                     return $http.jsonp('http://en.wikipedia.org/w/api.php', {

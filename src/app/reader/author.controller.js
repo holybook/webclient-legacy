@@ -8,7 +8,7 @@ angular.module('holybook').controller('Author',
         $scope.$watch('AuthorCtrl.page', function(page) {
             if (page !== undefined) {
                 api.book.query({
-                    language: "en",
+                    language: 'en',
                     author: $stateParams.id,
                     from: (page - 1) * 25,
                     size: 25
@@ -20,7 +20,7 @@ angular.module('holybook').controller('Author',
         });
 
         api.author.get({
-            language: "en",
+            language: 'en',
             id: $stateParams.id
         }, function (author) {
             AuthorCtrl.author = author;
@@ -29,7 +29,8 @@ angular.module('holybook').controller('Author',
 
         AuthorCtrl.page = 1;
 
-        return $scope.AuthorCtrl = AuthorCtrl;
+        $scope.AuthorCtrl = AuthorCtrl;
 
+        return AuthorCtrl;
     }
 );

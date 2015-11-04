@@ -19,7 +19,7 @@ angular.module('holybook').controller('Book',
         }, parseInt);
 
         api.book.get({
-            language: "en",
+            language: 'en',
             id: $stateParams.id
         }, function (book) {
             BookCtrl.book = book;
@@ -28,7 +28,7 @@ angular.module('holybook').controller('Book',
 
         function getParagraphs(page) {
             api.text({
-                language: "en",
+                language: 'en',
                 id: $stateParams.id,
                 from: (page - 1)*paragraphsPerPage,
                 size: paragraphsPerPage
@@ -60,14 +60,15 @@ angular.module('holybook').controller('Book',
 
         BookCtrl.isSelected = function(section, $index) {
             console.log(BookCtrl.absIndex(section, $index));
-            return (BookCtrl.selected == BookCtrl.absIndex(section, $index));
+            return (BookCtrl.selected === BookCtrl.absIndex(section, $index));
         };
 
         BookCtrl.selectedClass = function(section, $index) {
             return BookCtrl.isSelected(section, $index) ? 'book-paragraph-selected' : '';
         };
 
-        return $scope.BookCtrl = BookCtrl;
+        $scope.BookCtrl = BookCtrl;
+        return BookCtrl;
 
     }
 );

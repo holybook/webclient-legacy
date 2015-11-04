@@ -8,7 +8,7 @@ angular.module('holybook').controller('Religion',
         $scope.$watch('ReligionCtrl.page', function(page) {
             if (page !== undefined) {
                 api.book.query({
-                    language: "en",
+                    language: 'en',
                     religion: $stateParams.id,
                     from: (page - 1) * 25,
                     size: 25
@@ -20,7 +20,7 @@ angular.module('holybook').controller('Religion',
         });
 
         api.religion.get({
-            language: "en",
+            language: 'en',
             id: $stateParams.id
         }, function (religion) {
             ReligionCtrl.religion = religion;
@@ -28,7 +28,7 @@ angular.module('holybook').controller('Religion',
         });
 
         api.author.query({
-            language: "en",
+            language: 'en',
             religion: $stateParams.id
         }, function (authors) {
             ReligionCtrl.authors = authors;
@@ -38,7 +38,8 @@ angular.module('holybook').controller('Religion',
         ReligionCtrl.page = 1;
         ReligionCtrl.authorsVisible = true;
 
-        return $scope.ReligionCtrl = ReligionCtrl;
+        $scope.ReligionCtrl = ReligionCtrl;
 
+        return ReligionCtrl;
     }
 );

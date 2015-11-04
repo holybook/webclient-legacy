@@ -42,9 +42,9 @@ gulp.task('partials', function () {
 });
 
 gulp.task('html', ['styles', 'scripts', 'partials'], function () {
-  var htmlFilter = $.filter('*.html');
-  var jsFilter = $.filter('**/*.js');
-  var cssFilter = $.filter('**/*.css');
+  var htmlFilter = $.filter('*.html', { restore: true });
+  var jsFilter = $.filter('**/*.js', { restore: true });
+  var cssFilter = $.filter('**/*.css', { restore: true });
   var assets;
 
   return gulp.src('src/*.html')
@@ -59,11 +59,11 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
     .pipe(jsFilter)
     .pipe($.ngAnnotate())
     .pipe($.uglify({preserveComments: $.uglifySaveLicense}))
-    .pipe(jsFilter.restore())
+    .pipe(jsFilter.restore)
     .pipe(cssFilter)
     //.pipe($.replace('bower_components/bootstrap-sass-official/assets/fonts/bootstrap','fonts'))
     .pipe($.csso())
-    .pipe(cssFilter.restore())
+    .pipe(cssFilter.restore)
     .pipe(assets.restore())
     .pipe($.useref())
     .pipe($.revReplace())
@@ -73,13 +73,13 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
       spare: true,
       quotes: true
     }))
-    .pipe(htmlFilter.restore())
+    .pipe(htmlFilter.restore)
     .pipe(gulp.dest('dist'))
     .pipe($.size());
 });
 
 gulp.task('images', function () {
-  return gulp.src('src/assets/images/**/*', 'src/favicon.ico')
+  return gulp.src(['src/assets/images/**/*', 'src/favicon.ico'])
     .pipe($.cache($.imagemin({
       optimizationLevel: 3,
       progressive: true,

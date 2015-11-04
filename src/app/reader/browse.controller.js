@@ -6,13 +6,14 @@ angular.module('holybook').controller('BrowseRoot',
         var BrowserCtrl = this;
 
         api.religion.query({
-            language: "en"
+            language: 'en'
         }, function (religions) {
             console.log(religions);
             BrowserCtrl.religions = religions;
         });
 
-        return $scope.BrowserCtrl = BrowserCtrl;
+        $scope.BrowserCtrl = BrowserCtrl;
 
+        return BrowserCtrl;
     }
 );
