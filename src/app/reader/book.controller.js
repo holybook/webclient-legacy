@@ -59,7 +59,6 @@ angular.module('holybook').controller('Book',
         };
 
         BookCtrl.isSelected = function(section, $index) {
-            console.log(BookCtrl.absIndex(section, $index));
             return (BookCtrl.selected === BookCtrl.absIndex(section, $index));
         };
 

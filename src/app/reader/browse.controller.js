@@ -8,7 +8,6 @@ angular.module('holybook').controller('BrowseRoot',
         api.religion.query({
             language: 'en'
         }, function (religions) {
-            console.log(religions);
             BrowserCtrl.religions = religions;
         });
 

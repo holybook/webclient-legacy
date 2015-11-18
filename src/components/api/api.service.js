@@ -65,8 +65,6 @@ angular.module('holybook').factory('api', function ($http, $resource, env) {
                     }).then(function (res) {
                         return res.data.query.pages;
                     }).then(function (res) {
-                        console.log(res);
-                        console.log(objs);
                         return _.map(objs, function (o) {
                             var r = res[o.wikipedia_id];
                             if (r) {
