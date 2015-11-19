@@ -55,6 +55,10 @@ angular.module('holybook', [
             .state('roadmap', {
                 url: '/roadmap',
                 templateUrl: 'app/roadmap/roadmap.html'
+            })
+            .state('about', {
+                url: '/about',
+                templateUrl: 'app/about/about.html'
             });
 
         cfpLoadingBarProvider.includeSpinner = false;
@@ -71,7 +75,7 @@ angular.module('holybook', [
 );
 
 if (typeof String.prototype.startsWith !== 'function') {
-    String.prototype.startsWith = function (str){
+    String.prototype.startsWith = function (str) {
         return this.slice(0, str.length) === str;
     };
 }
