@@ -15,7 +15,7 @@ angular.module('holybook', [
 
     'holybook.config'
 ])
-    .config(function ($httpProvider, $locationProvider, $stateProvider, $urlRouterProvider, pagerConfig, cfpLoadingBarProvider) {
+    .config(function ($httpProvider, $locationProvider, $stateProvider, $urlRouterProvider, uibPagerConfig, cfpLoadingBarProvider) {
 
         $urlRouterProvider.otherwise('/search');
 
@@ -63,7 +63,7 @@ angular.module('holybook', [
 
         cfpLoadingBarProvider.includeSpinner = false;
 
-        pagerConfig.previousText = '&lsaquo;';
+        uibPagerConfig.previousText = '&lsaquo;';
         //{
         //    'previous-text' : "&lsaquo;",
         //    'next-text' : "&rsaquo;",

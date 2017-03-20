@@ -1,25 +1,25 @@
 {
   "name": "holybook",
   "dependencies": {
-    "modernizr": "2.8.x",
-    "angular": "1.2.x",
-    "angular-animate": "1.2.x",
-    "angular-cookies": "1.2.x",
-    "angular-touch": "1.2.x",
-    "angular-sanitize": "1.2.x",
-    "angular-resource": "1.2.x",
-    "angular-bootstrap": "~0.12.0",
-    "angular-ui-router": "~0.2.12",
-    "angular-loading-bar": "~0.6.0",
-    "lazy.js": "~0.3.2",
+    "modernizr": "*",
+    "angular": "*",
+    "angular-animate": "*",
+    "angular-cookies": "*",
+    "angular-touch": "*",
+    "angular-sanitize": "*",
+    "angular-resource": "*",
+    "angular-bootstrap": "*",
+    "angular-ui-router": "*",
+    "angular-loading-bar": "*",
+    "lazy.js": "*",
     "angular-scroll-when": "*",
-    "jquery": "~2.1.3",
-    "lodash": "~3.10.1",
-    "angulartics": "~0.20.1",
-    "angulartics-google-analytics": "~0.1.1",
-    "bootstrap-css-only": "~3.3.5"
+    "jquery": "*",
+    "lodash": "*",
+    "angulartics": "*",
+    "angulartics-google-analytics": "*",
+    "bootstrap-css-only": "*"
   },
   "devDependencies": {
-    "angular-mocks": "1.2.x"
+    "angular-mocks": "*"
   }
 }
